@@ -1,0 +1,4 @@
+node_modules
+backend/config/.env
+frontend/node_modules
+socket/node_modules
