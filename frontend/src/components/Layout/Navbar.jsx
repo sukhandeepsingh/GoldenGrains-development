@@ -11,7 +11,7 @@ const Navbar = ({ active }) => {
   const [dropDown, setDropDown] = useState(false);
 
   return (
-    <div className={`block 800px:${styles.normalFlex}`}>
+    <div className={`block 800px:${styles.normalFlex} items-center`}>
       {/* <div>
           {
             navItems && navItems.map((i,index) => (
@@ -26,21 +26,41 @@ const Navbar = ({ active }) => {
         }
         </div> */}
 
-      <div className="flex relative">
-        <div className="flex cursor-pointer">
+      <div className="800px:flex relative items-center">
+        <div className="flex cursor-pointer items-center">
           <Link
             to="/"
             className={`${
               pathname === "/"
-                ? "text-[#279736] 800px:text-[#279736] 800px:underline"
-                : "text-black 800px:text-[#000]"
-            } pb-[30px] 800px:pb-0 font-[500] px-6 cursor-pointer`}
+                ? "text-[#279736] 800px:text-[#fff] 800px:bg-slate-900 800px:rounded-full 800px:h-[27px]"
+                : "text-black 800px:text-[#000] 800px:border-slate-900 800px:rounded-full 800px:border-[1px]"
+            } pb-[30px] 800px:pb-0 font-[500] px-4 cursor-pointer 800px:mr-[2pt]`}
           >
             Home
           </Link>
         </div>
+        <div className="flex 800px:hidden relative cursor-pointer">
+          <Link
+            to="/categories"
+            className={`${
+              pathname === "/categories"
+                ? "text-[#279736] 800px:text-[#fff] 800px:bg-slate-900 800px:rounded-full 800px:h-[27px]"
+                : "text-black 800px:text-[#000] 800px:border-slate-900 800px:rounded-full 800px:border-[1px]"
+            } pb-[30px] 800px:pb-0 font-[500] px-4 cursor-pointer 800px:mr-[2pt]`}
+          >
+            Categories
+          </Link>
+          <div className="absolute">
+          {dropDown ? (
+            <DropDown
+              categoriesData={categoriesData}
+              setDropDown={setDropDown}
+            />
+          ) : null}
+          </div>
+        </div>
         <div
-          className="flex relative cursor-pointer"
+          className="hidden 800px:flex relative cursor-pointer"
           onMouseEnter={() => setDropDown(true)}
           onMouseLeave={() => setDropDown(false)}
         >
@@ -48,9 +68,9 @@ const Navbar = ({ active }) => {
             to="/categories"
             className={`${
               pathname === "/categories"
-                ? "text-[#279736] 800px:text-[#279736] 800px:underline"
-                : "text-black 800px:text-[#000]"
-            } pb-[30px] 800px:pb-0 font-[500] px-6 cursor-pointer`}
+                ? "text-[#279736] 800px:text-[#fff] 800px:bg-slate-900 800px:rounded-full 800px:h-[27px]"
+                : "text-black 800px:text-[#000] 800px:border-slate-900 800px:rounded-full 800px:border-[1px]"
+            } pb-[30px] 800px:pb-0 font-[500] px-4 cursor-pointer 800px:mr-[2pt]`}
           >
             Categories
           </Link>
@@ -68,9 +88,9 @@ const Navbar = ({ active }) => {
             to="/products"
             className={`${
               pathname === "/products"
-                ? "text-[#279736] 800px:text-[#279736] 800px:underline"
-                : "text-black 800px:text-[#000]"
-            } pb-[30px] 800px:pb-0 font-[500] px-6 cursor-pointer`}
+                ? "text-[#279736] 800px:text-[#fff] 800px:bg-slate-900 800px:rounded-full 800px:h-[27px]"
+                : "text-black 800px:text-[#000] 800px:border-slate-900 800px:rounded-full 800px:border-[1px]"
+            } pb-[30px] 800px:pb-0 font-[500] px-4 cursor-pointer 800px:mr-[2pt]`}
           >
             Products
           </Link>
@@ -80,9 +100,9 @@ const Navbar = ({ active }) => {
             to="/events"
             className={`${
               pathname === "/events"
-                ? "text-[#279736] 800px:text-[#279736] 800px:underline"
-                : "text-black 800px:text-[#000]"
-            } pb-[30px] 800px:pb-0 font-[500] px-6 cursor-pointer`}
+                ? "text-[#279736] 800px:text-[#fff] 800px:bg-slate-900 800px:rounded-full 800px:h-[27px]"
+                : "text-black 800px:text-[#000] 800px:border-slate-900 800px:rounded-full 800px:border-[1px]"
+            } pb-[30px] 800px:pb-0 font-[500] px-4 cursor-pointer 800px:mr-[2pt]`}
           >
             Events
           </Link>
@@ -92,25 +112,21 @@ const Navbar = ({ active }) => {
             to="/faq"
             className={`${
               pathname === "/faq"
-                ? "text-[#279736] 800px:text-[#279736] 800px:underline"
-                : "text-black 800px:text-[#000]"
-            } pb-[30px] 800px:pb-0 font-[500] px-6 cursor-pointer`}
+                ? "text-[#279736] 800px:text-[#fff] 800px:bg-slate-900 800px:rounded-full 800px:h-[27px]"
+                : "text-black 800px:text-[#000] 800px:border-slate-900 800px:rounded-full 800px:border-[1px]"
+            } pb-[30px] 800px:pb-0 font-[500] px-4 cursor-pointer 800px:mr-[2pt]`}
           >
             FAQ
           </Link>
         </div>
-        <div className="flex cursor-pointer">
+        <div className="hidden 800px:flex cursor-pointer 800px:border-slate-900 800px:rounded-full 800px:border-[1px]">
           {isSeller ? (
-            <Link to="/dashboard">
-              <h1 className="text-[#000] flex px-6 items-center">
+            <Link to="/dashboard" className="text-[#000] flex px-4 items-center pb-[30px] 800px:pb-0 font-[500]">
                 Farmer Dashboard 
-              </h1>
             </Link>
           ) : (
-            <Link to="/shop-create">
-              <h1 className="text-[#000] flex px-6 items-center">
+            <Link to="/shop-create" className="text-[#000] flex px-4 items-center pb-[30px] 800px:pb-0 font-[500]">
                 Register as Farmer 
-              </h1>
             </Link>
           )}
         </div>

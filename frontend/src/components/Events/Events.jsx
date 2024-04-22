@@ -15,10 +15,18 @@ const Events = () => {
   return (
     <div>
       {!isLoading && (
+        <>
+          <div className={`${styles.section} flex justify-between items-center`}>
+        <div className={`text-[27px] text-center md:text-start font-[600] font-Roboto`}>
+          <h1>Popular Events</h1>
+        </div>
+        <div
+          className={`${styles.button} !h-[34pt] !bg-[#279736] !text-[#fff] !w-auto !px-2 !rounded-[5pt]`}
+        >
+          <Link to="/events">See All Events</Link>
+        </div>
+      </div>
         <div className={`${styles.section}`}>
-          <div className={`${styles.heading}`}>
-            <h1>Popular Events</h1>
-          </div>
 
           <div className="w-full grid mb-4">
             {allEvents.length !== 0 ? (
@@ -33,7 +41,10 @@ const Events = () => {
                     </h4>
                     <h4>
                       Until then, check out our{" "}
-                      <Link to="/products" className="text-[#279736] hover:underline">
+                      <Link
+                        to="/products"
+                        className="text-[#279736] hover:underline"
+                      >
                         products catalogue
                       </Link>
                       .
@@ -44,6 +55,7 @@ const Events = () => {
             )}
           </div>
         </div>
+        </>
       )}
     </div>
   );

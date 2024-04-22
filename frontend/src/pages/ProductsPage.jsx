@@ -31,7 +31,13 @@ const ProductsPage = () => {
     <div>
       <Header activeHeading={3} />
       <br />
-      <br />
+      <div className="w-full flex justify-center">
+        <div className={`${styles.section}`}>
+            <h1 className={`${styles.heading} w-[180pt] justify-center flex`}>
+                <span>All Products</span>
+            </h1>
+        </div>
+      </div>
       <div className={`${styles.section}`}>
         <div className="grid grid-cols-1 gap-[20px] md:grid-cols-2 md:gap-[25px] lg:grid-cols-4 lg:gap-[25px] xl:grid-cols-5 xl:gap-[30px] mb-12">
           {

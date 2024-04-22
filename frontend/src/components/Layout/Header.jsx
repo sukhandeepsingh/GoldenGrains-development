@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import styles from "../../styles/styles";
 import { categoriesData, productData } from "../../static/data";
 import {
@@ -7,6 +7,7 @@ import {
   AiOutlineSearch,
   // AiOutlineShop,
   AiOutlineShoppingCart,
+  AiOutlineUser,
 } from "react-icons/ai";
 import { IoIosArrowDown, IoIosArrowForward } from "react-icons/io";
 import { BiMenuAltLeft } from "react-icons/bi";
@@ -34,6 +35,7 @@ const Header = ({ activeHeading }) => {
   const [openWishlist, setOpenWishlist] = useState(false);
   const [openSearch, setOpenSearch] = useState(false);
   const [open, setOpen] = useState(false);
+  const { pathname } = useLocation();
 
   const handleSearchChange = (e) => {
     const term = e.target.value;
@@ -121,16 +123,18 @@ const Header = ({ activeHeading }) => {
         </div>
       </div> */}
 
-      <div
-        className={`${
-          active === true ? "shadow-sm fixed top-0 left-0 z-10" : null
-        } transition hidden 800px:flex items-center justify-between w-full bg-green-100 h-[70px]`}
-      >
-        <div
-          className={`${styles.section} relative ${styles.normalFlex} justify-between`}
-        >
-          {/* categories */}
-          {/* <div
+      <div className="flex w-full justify-center mt-4 mb-7">
+        <div className={`800px:flex 800px:w-[100%] 800px:rounded-[0px] 800px:border-slate-600 800px:border-b-[2pt]`}>
+          <div
+            className={`${
+              active === true ? "shadow-sm top-0 left-0 z-10" : null
+            } transition hidden 800px:flex items-center justify-between w-full h-[70px]`}
+          >
+            <div
+              className={`${styles.section} relative ${styles.normalFlex} justify-between`}
+            >
+              {/* categories */}
+              {/* <div
             // onClick={() => setDropDown(!dropDown)}
             onMouseEnter={() => setDropDown(true)}
             onMouseLeave={() => setDropDown(false)}
@@ -155,85 +159,86 @@ const Header = ({ activeHeading }) => {
               ) : null}
             </div>
           </div> */}
-          <div>
-            <Link to="/">
-              <img
-                src="https://i.ibb.co/Pg24SHR/weblogo.png"
-                alt="Golden Grains"
-                className="w-[100px] h-auto"
-              />
-            </Link>
-          </div>
+              <div className="w-[100px]">
+                <Link to="/">
+                  <img
+                    src="https://i.ibb.co/Pg24SHR/weblogo.png"
+                    alt="Golden Grains"
+                    className="w-[100px] h-auto"
+                  />
+                </Link>
+              </div>
 
-          {/* navitems */}
-          <div className={`${styles.normalFlex} items-center`}>
-            <Navbar active={activeHeading} />
-          </div>
+              {/* navitems */}
+              <div className={`${styles.normalFlex} items-center`}>
+                <Navbar active={activeHeading} />
+              </div>
 
-          {/* right most */}
-          <div className="flex">
-            <div className={`${styles.normalFlex}`}>
-              <div
-                className="relative cursor-pointer mr-[15px]"
-                onClick={() => setOpenSearch(true)}
-              >
-                <AiOutlineSearch size={30} className="fill-[#000]" />
+              {/* right most */}
+              <div className="flex">
+                <div className={`${styles.normalFlex}`}>
+                  <div
+                    className="relative cursor-pointer mr-[10px]"
+                    onClick={() => setOpenSearch(true)}
+                  >
+                    <AiOutlineSearch size={35} className="fill-[#000] p-1" />
+                  </div>
+                </div>
+                {openSearch ? (
+                  <SearchPopup setOpenSearch={setOpenSearch} />
+                ) : null}
+
+                <div className={`${styles.normalFlex}`}>
+                  <div
+                    className="relative cursor-pointer mr-[10px]"
+                    onClick={() => setOpenWishlist(true)}
+                  >
+                    <AiOutlineHeart size={35} className="fill-[#000] p-1" />
+                    <span className="absolute right-0 top-0 rounded-full bg-[#4359d6] w-4 h-4 top right p-0 m-0 text-white font-mono text-[12px] leading-tight text-center">
+                      {wishlist && wishlist.length}
+                    </span>
+                  </div>
+                </div>
+
+                <div className={`${styles.normalFlex}`}>
+                  <div
+                    className="relative cursor-pointer mr-[05px]"
+                    onClick={() => setOpenCart(true)}
+                  >
+                    <AiOutlineShoppingCart size={35} className="fill-[#000] p-1" />
+                    <span className="absolute right-0 top-0 rounded-full bg-[#4359d6] w-4 h-4 top right p-0 m-0 text-white font-mono text-[12px] leading-tight text-center">
+                      {cart && cart.length}
+                    </span>
+                  </div>
+                </div>
+
+                <div className={`${styles.normalFlex}`}>
+                  <div className="relative cursor-pointer">
+                    {/* {isAuthenticated ? ( */}
+                      <Link to={isAuthenticated ? "/profile" : "/login"}>
+                        {/* <img
+                          src={`${backend_url}${user.avatar}`}
+                          className="w-[35px] h-[35px] rounded-full aspect-square flex-shrink-0"
+                          alt=""
+                        /> */}
+                        <AiOutlineUser size={`${pathname === "/profile" ? 32 : 35}`} className={`${pathname === "/profile" ? "fill-[#fff] bg-[#000] rounded-full" : "fill-[#000]"} p-1`} />
+                      </Link>
+                    {/* ) : (
+                      <Link to="/login">
+                        <AiOutlineUser size={30} className="fill-[#000]" />
+                      </Link>
+                    )} */}
+                  </div>
+                </div>
+
+                {/* cart popup */}
+                {openCart ? <Cart setOpenCart={setOpenCart} /> : null}
+                {/* wishlist popup */}
+                {openWishlist ? (
+                  <Wishlist setOpenWishlist={setOpenWishlist} />
+                ) : null}
               </div>
             </div>
-            {openSearch ? <SearchPopup setOpenSearch={setOpenSearch} /> : null}
-
-            <div className={`${styles.normalFlex}`}>
-              <div
-                className="relative cursor-pointer mr-[15px]"
-                onClick={() => setOpenWishlist(true)}
-              >
-                <AiOutlineHeart size={30} className="fill-[#000]" />
-                <span className="absolute right-0 top-0 rounded-full bg-[#4359d6] w-4 h-4 top right p-0 m-0 text-white font-mono text-[12px] leading-tight text-center">
-                  {wishlist && wishlist.length}
-                </span>
-              </div>
-            </div>
-
-            <div className={`${styles.normalFlex}`}>
-              <div
-                className="relative cursor-pointer mr-[15px]"
-                onClick={() => setOpenCart(true)}
-              >
-                <AiOutlineShoppingCart
-                  size={30}
-                  className="fill-[#000]"
-                />
-                <span className="absolute right-0 top-0 rounded-full bg-[#4359d6] w-4 h-4 top right p-0 m-0 text-white font-mono text-[12px] leading-tight text-center">
-                  {cart && cart.length}
-                </span>
-              </div>
-            </div>
-
-            <div className={`${styles.normalFlex}`}>
-              <div className="relative cursor-pointer mr-[15px]">
-                {isAuthenticated ? (
-                  <Link to="/profile">
-                    {/* {user.name} */}
-                    <img
-                      src={`${backend_url}${user.avatar}`}
-                      className="w-[35px] h-[35px] rounded-full"
-                      alt=""
-                    />
-                  </Link>
-                ) : (
-                  <Link to="/login">
-                    <CgProfile size={30} className="fill-[#000]" />
-                  </Link>
-                )}
-              </div>
-            </div>
-
-            {/* cart popup */}
-            {openCart ? <Cart setOpenCart={setOpenCart} /> : null}
-            {/* wishlist popup */}
-            {openWishlist ? (
-              <Wishlist setOpenWishlist={setOpenWishlist} />
-            ) : null}
           </div>
         </div>
       </div>

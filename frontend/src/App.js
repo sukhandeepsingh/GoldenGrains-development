@@ -6,6 +6,7 @@ import {
   SignupPage,
   ActivationPage,
   HomePage,
+  CategoriesPage,
   ProductsPage,
   BestSellingPage,
   EventsPage,
@@ -95,6 +96,7 @@ const App = () => {
       )}
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/categories" element={<CategoriesPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/sign-up" element={<SignupPage />} />
         <Route

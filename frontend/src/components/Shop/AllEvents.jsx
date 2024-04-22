@@ -142,13 +142,13 @@ const AllEvents = () => {
               </h3>
               <div className="w-full flex items-center justify-center">
                 <div
-                  className={`${styles.button} text-white text-[18px] !h-[42px] mr-4`}
+                  className={`${styles.button} text-white text-[18px] !rounded-[4pt] !h-[30pt] mr-4`}
                   onClick={() => setOpenDelete(false)}
                 >
                   Cancel
                 </div>
                 <div
-                  className={`${styles.button} text-white text-[18px] !h-[42px] ml-4`}
+                  className={`${styles.button} text-white text-[18px] !rounded-[4pt] !h-[30pt] ml-4`}
                   onClick={() => setOpenDelete(false) || handleDelete(eventId)}
                 >
                   Confirm Delete

@@ -28,13 +28,13 @@ const EventCard = ({ active, data }) => {
   return (
     <div
       className={`w-full block bg-white rounded-lg ${
-        active ? "unset" : "mb-12"
+        active ? "unset" : "mb-9"
       } lg:flex p-2`}
     >
-      <div className="w-full lg:w-[50%] m-auto">
-        <img src={`${backend_url}${data.images[0]}`} alt="" />
+      <div className="w-full lg:w-[35%] m-auto flex justify-center items-center">
+        <img src={`${backend_url}${data.images[0]}`} alt="" className="flex w-[80%] object-cover p-6" />
       </div>
-      <div className="w-full lg:w-[50%] flex flex-col justify-center">
+      <div className="w-full lg:w-[65%] flex flex-col justify-center">
         <h2 className={`${styles.productTitle}`}>{data.name}</h2>
         <p>{data.description}</p>
         <div className="flex py-2 justify-between">
@@ -46,17 +46,17 @@ const EventCard = ({ active, data }) => {
               Rs. {data.discountPrice}
             </h5>
           </div>
-          <span className="pr-3 font-[400] text-[17px] text-[#44a55e]">
+          {/* <span className="pr-3 font-[400] text-[17px] text-[#44a55e]">
             {data.sold_out} sold
-          </span>
+          </span> */}
         </div>
         <CountDown data={data} />
         <br />
         <div className="flex items-center">
           <Link to={`/product/${data._id}?isEvent=true`}>
-            <div className={`${styles.button} text-[#fff]`}>See details</div>
+            <div className={`${styles.button} !rounded-[4pt] !h-[30pt] text-[#fff]`}>See details</div>
           </Link>
-          <div className={`${styles.button} text-[#fff] ml-5`} onClick={() => addToCartHandler(data)}>Add to cart</div>
+          <div className={`${styles.button} !rounded-[4pt] !h-[30pt] text-[#fff] ml-5`} onClick={() => addToCartHandler(data)}>Add to cart</div>
         </div>
       </div>
     </div>

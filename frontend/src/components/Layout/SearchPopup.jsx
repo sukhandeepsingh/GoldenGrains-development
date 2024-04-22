@@ -25,11 +25,11 @@ const SearchPopup = ({ setOpenSearch }) => {
   return (
     <>
       <div
-        className="fixed top-0 left-0 w-full bg-[#0000004b] h-screen z-10 justify-center flex"
+        className="fixed top-0 left-0 w-full bg-[#00000085] h-screen z-10 justify-center flex"
         onClick={() => setOpenSearch(false)}
       ></div>
-      <div className="h-[80px] top-0 left-0 z-20 justify-center flex w-full fixed">
-        <div className="fixed top-1 h-[75px] w-[98%] bg-[#f7facbe5] flex items-center justify-between z-30 rounded-[5px]">
+      <div className="h-[80px] top-3 left-0 z-20 justify-center flex w-full fixed">
+        <div className="fixed h-[75px] w-[95%] bg-slate-50 flex items-center justify-between z-30 rounded-[10px] border-[1px] border-slate-600">
           <div className="w-[20%]"></div>
           <div className="relative w-[60%]">
             <input
@@ -37,7 +37,7 @@ const SearchPopup = ({ setOpenSearch }) => {
               placeholder="type here to search"
               value={searchTerm}
               onChange={handleSearchChange}
-              className="h-[40px] w-full px-2 border-[#279736] border-[2px] rounded-md"
+              className="h-[40px] w-full px-2 !bg-[#fff] border-slate-600 border-[2px] rounded-md focus:border-none"
             />
             <AiOutlineSearch
               size={30}

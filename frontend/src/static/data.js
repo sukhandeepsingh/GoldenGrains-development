@@ -27,7 +27,7 @@ export const navItems = [
     {
       id: 1,
       title: "Free Shipping",
-      Description: "From all orders over 100$",
+      Description: "From all orders over Rs. 70",
       icon: (
         <svg
           width="36"
@@ -76,8 +76,36 @@ export const navItems = [
     },
     {
       id: 2,
-      title: "Daily Surprise Offers",
-      Description: "Save up to 25% off",
+      title: "Special discounts on events",
+      Description: "Save more on festivals",
+      icon: (
+        <svg
+          width="32"
+          height="34"
+          viewBox="0 0 32 34"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M31 17.4502C31 25.7002 24.25 32.4502 16 32.4502C7.75 32.4502 1 25.7002 1 17.4502C1 9.2002 7.75 2.4502 16 2.4502C21.85 2.4502 26.95 5.7502 29.35 10.7002"
+            stroke="#FFBB38"
+            stroke-width="2"
+            stroke-miterlimit="10"
+          ></path>
+          <path
+            d="M30.7 2L29.5 10.85L20.5 9.65"
+            stroke="#FFBB38"
+            stroke-width="2"
+            stroke-miterlimit="10"
+            stroke-linecap="square"
+          ></path>
+        </svg>
+      ),
+    },
+    {
+      id: 3,
+      title: "Fresh Products",
+      Description: "Get items directly from Farmers",
       icon: (
         <svg
           width="32"
@@ -104,8 +132,8 @@ export const navItems = [
     },
     {
       id: 4,
-      title: "Affortable Prices",
-      Description: "Get Factory direct price",
+      title: "Affordable Prices",
+      Description: "Get items directly from Farmers",
       icon: (
         <svg
           width="32"
@@ -149,42 +177,42 @@ export const navItems = [
         </svg>
       ),
     },
-    {
-      id: 5,
-      title: "Secure Payments",
-      Description: "100% protected payments",
-      icon: (
-        <svg
-          width="32"
-          height="38"
-          viewBox="0 0 32 38"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M22.6654 18.667H9.33203V27.0003H22.6654V18.667Z"
-            stroke="#FFBB38"
-            stroke-width="2"
-            stroke-miterlimit="10"
-            stroke-linecap="square"
-          ></path>
-          <path
-            d="M12.668 18.6663V13.6663C12.668 11.833 14.168 10.333 16.0013 10.333C17.8346 10.333 19.3346 11.833 19.3346 13.6663V18.6663"
-            stroke="#FFBB38"
-            stroke-width="2"
-            stroke-miterlimit="10"
-            stroke-linecap="square"
-          ></path>
-          <path
-            d="M31 22C31 30.3333 24.3333 37 16 37C7.66667 37 1 30.3333 1 22V5.33333L16 2L31 5.33333V22Z"
-            stroke="#FFBB38"
-            stroke-width="2"
-            stroke-miterlimit="10"
-            stroke-linecap="square"
-          ></path>
-        </svg>
-      ),
-    },
+    // {
+    //   id: 5,
+    //   title: "Secure Payments",
+    //   Description: "100% protected payments",
+    //   icon: (
+    //     <svg
+    //       width="32"
+    //       height="38"
+    //       viewBox="0 0 32 38"
+    //       fill="none"
+    //       xmlns="http://www.w3.org/2000/svg"
+    //     >
+    //       <path
+    //         d="M22.6654 18.667H9.33203V27.0003H22.6654V18.667Z"
+    //         stroke="#FFBB38"
+    //         stroke-width="2"
+    //         stroke-miterlimit="10"
+    //         stroke-linecap="square"
+    //       ></path>
+    //       <path
+    //         d="M12.668 18.6663V13.6663C12.668 11.833 14.168 10.333 16.0013 10.333C17.8346 10.333 19.3346 11.833 19.3346 13.6663V18.6663"
+    //         stroke="#FFBB38"
+    //         stroke-width="2"
+    //         stroke-miterlimit="10"
+    //         stroke-linecap="square"
+    //       ></path>
+    //       <path
+    //         d="M31 22C31 30.3333 24.3333 37 16 37C7.66667 37 1 30.3333 1 22V5.33333L16 2L31 5.33333V22Z"
+    //         stroke="#FFBB38"
+    //         stroke-width="2"
+    //         stroke-miterlimit="10"
+    //         stroke-linecap="square"
+    //       ></path>
+    //     </svg>
+    //   ),
+    // },
   ];
   
   // categories data

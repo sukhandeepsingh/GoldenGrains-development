@@ -18,11 +18,13 @@ import { addTocart } from "../../redux/actions/cart";
 import { toast } from "react-toastify";
 import Ratings from "./Ratings";
 import axios from "axios";
+import Loader from "../Layout/Loader";
 
 const ProductDetails = ({ data }) => {
   const { wishlist } = useSelector((state) => state.wishlist);
   const { cart } = useSelector((state) => state.cart);
   const { user, isAuthenticated } = useSelector((state) => state.user);
+  const [farmerData, setFarmerData] = useState({});
   const [count, setCount] = useState(1);
   const [click, setClick] = useState(false);
   const [select, setSelect] = useState(0);
@@ -37,7 +39,16 @@ const ProductDetails = ({ data }) => {
     } else {
       setClick(false);
     }
-  }, [dispatch, data, wishlist]);
+
+    axios
+      .get(`${server}/shop/get-shop-info/${data && data?.shop._id}`)
+      .then((res) => {
+        setFarmerData(res.data.shop);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [dispatch, data, farmerData, wishlist]);
 
   const incrementCount = () => {
     setCount(count + 1);
@@ -110,132 +121,146 @@ const ProductDetails = ({ data }) => {
     }
   };
   return (
-    <div className="bg-white">
+    <div className="">
       {data ? (
-        <div className={`${styles.section} w-[90%] 800px:w-[80%]`}>
-          {/* top area (images,name,des,price,message) */}
-          <div className="w-full py-5">
-            <div className="block w-full 800px:flex">
-              <div className="w-full 800px:w-[50%]">
-                <img
-                  src={`${backend_url}${data && data.images[select]}`}
-                  alt=""
-                  className="w-[80%]"
-                />
-                <div className="w-full flex">
-                  {data &&
-                    data.images.map((i, index) => (
-                      <div
-                        className={`${
-                          select === 0 ? "border" : "null"
-                        } cursor-pointer`}
+        <>
+          <div
+            className={`${styles.section} bg-[#ffffffe0] border-slate-200 border-[1pt] rounded-[10pt] px-4`}
+          >
+            {/* top area (images,name,des,price,message) */}
+            <div className="w-full py-5">
+              <div className="block w-full 800px:flex">
+                {/* images */}
+                <div className="w-full 800px:w-[50%] items-center justify-center">
+                  <div className="flex w-[80%] h-[60%] justify-center">
+                    <img
+                      src={`${backend_url}${data && data.images[select]}`}
+                      alt=""
+                      className="w-auto max-h-[300pt] rounded-lg"
+                    />
+                  </div>
+                  <div className="w-[80%] flex h-[40%] items-center justify-center">
+                    {data &&
+                      data?.images?.map((i, index) => (
+                        <div
+                          className={`${
+                            select === i ? "border" : "null"
+                          } cursor-pointer`}
+                        >
+                          <img
+                            src={`${backend_url}${i}`}
+                            alt=""
+                            className={`h-[150px] overflow-hidden rounded-lg mr-3 mt-3 ${select === index ? "border-slate-600 scale-105" : "border-slate-300"} border-[1pt] object-fill`}
+                            onClick={() => setSelect(index)}
+                          />
+                        </div>
+                      ))}
+                    {/* <div
+                      className={`${
+                        select === 1 ? "border" : "null"
+                      } cursor-pointer`}
+                    >
+                      <img
+                        src={`${backend_url}${data.images && data.images[0]}`}
+                        alt=""
+                        className="h-[200px]"
+                        onClick={() => setSelect(1)}
+                      />
+                    </div> */}
+                  </div>
+                </div>
+
+                {/* data */}
+                <div className="w-full 800px:w-[50%] pt-5">
+                  <h1 className={`${styles.productTitle}`}>{data.name}</h1>
+                  <div className="flex items-center mb-5">
+                  <Ratings rating={data?.ratings} />
+                  {" "}
+                  <span className="text-[10pt]">({data?.ratings}/5)</span>
+                  </div>
+                  <p className="w-full underline font-[600] text-[14pt]">Description</p>
+                  <p>{data.description}</p>
+                  <div className="flex pt-3 mt-3">
+                    <h4 className={`${styles.productDiscountPrice}`}>
+                      Rs. {data.discountPrice}
+                    </h4>
+                    <h3 className={`${styles.price}`}>
+                      {data.originalPrice ? "Rs." + data.originalPrice : null}
+                    </h3>
+                  </div>
+                  <div className="flex items-center mt-12 justify-between pr-3">
+                    <div>
+                      <button
+                        className="bg-gradient-to-r from-teal-400 to-teal-500 text-white font-bold rounded-l px-4 py-2 shadow-lg hover:opacity-75 transition duration-300 ease-in-out"
+                        onClick={decrementCount}
                       >
-                        <img
-                          src={`${backend_url}${i}`}
-                          alt=""
-                          className="h-[200px] overflow-hidden mr-3 mt-3"
-                          onClick={() => setSelect(index)}
+                        -
+                      </button>
+                      <span className="bg-gray-200 text-gray-800 font-medium px-4 py-[11px]">
+                        {count}
+                      </span>
+                      <button
+                        className="bg-gradient-to-r from-teal-400 to-teal-500 text-white font-bold rounded-r px-4 py-2 shadow-lg hover:opacity-75 transition duration-300 ease-in-out"
+                        onClick={incrementCount}
+                      >
+                        +
+                      </button>
+                    </div>
+
+                    <div>
+                      {click ? (
+                        <AiFillHeart
+                          size={30}
+                          className="cursor-pointer"
+                          onClick={() => removeFromWishlistHandler(data)}
+                          color={click ? "red" : "#333"}
+                          title="Remove from wishlist"
                         />
-                      </div>
-                    ))}
-                  <div
-                    className={`${
-                      select === 1 ? "border" : "null"
-                    } cursor-pointer`}
-                  >
-                    <img
-                      src={`${backend_url}${data.images && data.images[0]}`}
-                      alt=""
-                      className="h-[200px]"
-                      onClick={() => setSelect(1)}
-                    />
-                  </div>
-                </div>
-              </div>
-
-              <div className="w-full 800px:w-[50%] pt-5">
-                <h1 className={`${styles.productTitle}`}>{data.name}</h1>
-                <p>{data.description}</p>
-                <div className="flex pt-3">
-                  <h4 className={`${styles.productDiscountPrice}`}>
-                    Rs. {data.discountPrice}
-                  </h4>
-                  <h3 className={`${styles.price}`}>
-                    {data.originalPrice ? "Rs." + data.originalPrice : null}
-                  </h3>
-                </div>
-                <div className="flex items-center mt-12 justify-between pr-3">
-                  <div>
-                    <button
-                      className="bg-gradient-to-r from-teal-400 to-teal-500 text-white font-bold rounded-l px-4 py-2 shadow-lg hover:opacity-75 transition duration-300 ease-in-out"
-                      onClick={decrementCount}
-                    >
-                      -
-                    </button>
-                    <span className="bg-gray-200 text-gray-800 font-medium px-4 py-[11px]">
-                      {count}
-                    </span>
-                    <button
-                      className="bg-gradient-to-r from-teal-400 to-teal-500 text-white font-bold rounded-r px-4 py-2 shadow-lg hover:opacity-75 transition duration-300 ease-in-out"
-                      onClick={incrementCount}
-                    >
-                      +
-                    </button>
-                  </div>
-
-                  <div>
-                    {click ? (
-                      <AiFillHeart
-                        size={30}
-                        className="cursor-pointer"
-                        onClick={() => removeFromWishlistHandler(data)}
-                        color={click ? "red" : "#333"}
-                        title="Remove from wishlist"
-                      />
-                    ) : (
-                      <AiOutlineHeart
-                        size={30}
-                        className="cursor-pointer"
-                        onClick={() => addToWishlistHandler(data)}
-                        color={click ? "red" : "#333"}
-                        title="Add to wishlist"
-                      />
-                    )}
-                  </div>
-                </div>
-                <div
-                  className={`${styles.button} !mt-6 !rounded !h-11 flex items-center`}
-                  onClick={() => addToCartHandler(data._id)}
-                >
-                  <span className="text-white flex items-center">
-                    Add to trolley <AiOutlineShoppingCart className="ml-1" />
-                  </span>
-                </div>
-                <div className="flex items-center pt-8">
-                  <Link to={`/shop/preview/${data?.shop._id}`}>
-                    <img
-                      src={`${backend_url}${data?.shop?.avatar}`}
-                      alt=""
-                      className="w-[50px] h-[50px] rounded-full mr-2"
-                    />
-                  </Link>
-                  <div className="pr-8">
-                    <Link to={`/shop/preview/${data?.shop._id}`}>
-                      <h3 className={`${styles.shop_name} pb-1 pt-1`}>
-                        {data.shop.name}
-                      </h3>
-                    </Link>
-                    <h5 className="pb-3 text-[15px]">
-                      ({averageRating} of 5) Ratings
-                    </h5>
+                      ) : (
+                        <AiOutlineHeart
+                          size={30}
+                          className="cursor-pointer"
+                          onClick={() => addToWishlistHandler(data)}
+                          color={click ? "red" : "#333"}
+                          title="Add to wishlist"
+                        />
+                      )}
+                    </div>
                   </div>
                   <div
-                    className={`${styles.button} bg-[#6443d1] mt-4 !rounded !h-11`}
-                    onClick={handleMessageSubmit}
+                    className={`${styles.button} !mt-6 !rounded !h-11 flex items-center`}
+                    onClick={() => addToCartHandler(data._id)}
                   >
                     <span className="text-white flex items-center">
-                      Contact farmer <AiOutlineMessage className="ml-1" />
+                      Add to trolley <AiOutlineShoppingCart className="ml-1" />
                     </span>
+                  </div>
+                  <div className="flex items-center pt-8">
+                    <Link to={`/shop/preview/${data?.shop._id}`}>
+                      <img
+                        src={`${backend_url}${farmerData?.avatar}`}
+                        alt=""
+                        className="w-[50px] h-[50px] rounded-full mr-2"
+                      />
+                    </Link>
+                    <div className="pr-8">
+                      <Link to={`/shop/preview/${farmerData?._id}`}>
+                        <h3 className={`${styles.shop_name} pb-1 pt-1`}>
+                          {farmerData?.name}
+                        </h3>
+                      </Link>
+                      <h5 className="pb-3 text-[15px]">
+                        ({averageRating} of 5) Ratings
+                      </h5>
+                    </div>
+                    <div
+                      className={`${styles.button} bg-[#6443d1] mt-4 !rounded !h-11`}
+                      onClick={handleMessageSubmit}
+                    >
+                      <span className="text-white flex items-center">
+                        Contact farmer <AiOutlineMessage className="ml-1" />
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -244,16 +269,19 @@ const ProductDetails = ({ data }) => {
           {/* top area finish */}
 
           {/* details info */}
-          <ProductDetailsInfo
-            data={data}
-            products={products}
-            totalReviewsLength={totalReviewsLength}
-            averageRating={averageRating}
-          />
-          <br />
-          <br />
-        </div>
-      ) : null}
+          <div className={`${styles.section} my-2 mt-10`}>
+            <ProductDetailsInfo
+              data={data}
+              products={products}
+              totalReviewsLength={totalReviewsLength}
+              averageRating={averageRating}
+              farmerData={farmerData}
+            />
+          </div>
+        </>
+      ) : (
+        <Loader />
+      )}
     </div>
   );
 };
@@ -263,15 +291,16 @@ const ProductDetailsInfo = ({
   products,
   totalReviewsLength,
   averageRating,
+  farmerData,
 }) => {
   const [active, setActive] = useState(1);
   return (
-    <div className="bg-[#f5f6fb] px-3 800px:px-10 py-2 rounded">
+    <div className="px-3 800px:px-10 py-2 rounded-lg bg-[#ffffffe0] border-slate-200 border-[1pt] min-h-[220pt]">
       <div className="w-full flex justify-between border-b pt-10 pb-2">
         {/* tab 1 */}
         <div className="relative">
           <h5
-            className="text-[#000] text-[18px] px-1 leading-5 font-[600] cursor-pointer 800px:text-[20px]"
+            className={`${active === 1 ? "text-[#279736]" : "text-[#000]"} text-[18px] px-1 leading-5 font-[600] cursor-pointer 800px:text-[20px]`}
             onClick={() => setActive(1)}
           >
             Product Details
@@ -284,7 +313,7 @@ const ProductDetailsInfo = ({
         {/* tab 2 */}
         <div className="relative">
           <h5
-            className="text-[#000] text-[18px] px-1 leading-5 font-[600] cursor-pointer 800px:text-[20px]"
+            className={`${active === 2 ? "text-[#279736]" : "text-[#000]"} text-[18px] px-1 leading-5 font-[600] cursor-pointer 800px:text-[20px]`}
             onClick={() => setActive(2)}
           >
             Product Reviews
@@ -297,7 +326,7 @@ const ProductDetailsInfo = ({
         {/* tab 3 */}
         <div className="relative">
           <h5
-            className="text-[#000] text-[18px] px-1 leading-5 font-[600] cursor-pointer 800px:text-[20px]"
+            className={`${active === 3 ? "text-[#279736]" : "text-[#000]"} text-[18px] px-1 leading-5 font-[600] cursor-pointer 800px:text-[20px]`}
             onClick={() => setActive(3)}
           >
             Farmer Details
@@ -346,16 +375,16 @@ const ProductDetailsInfo = ({
         <div className="w-full block 800px:flex p-5">
           {/* left half */}
           <div className="w-full 800px:w-[50%]">
-            <Link to={`/shop/preview/${data.shop._id}`}>
+            <Link to={`/shop/preview/${data?.shop?._id}`}>
               <div className="flex items-center">
                 <img
-                  src={`${backend_url}${data?.shop?.avatar}`}
+                  src={`${backend_url}${farmerData?.avatar}`}
                   alt=""
                   className="w-[50px] h-[50px] rounded-full"
                 />
                 <div className="pl-3">
                   <h3 className={`${styles.shop_name} pb-2`}>
-                    {data.shop.name}
+                    {farmerData?.name}
                   </h3>
                   <h5 className="pb-2 text-[15px]">
                     ({averageRating}/5) Ratings
@@ -371,7 +400,7 @@ const ProductDetailsInfo = ({
               <h5 className="font-[600]">
                 Joined on:{" "}
                 <span className="font-[500]">
-                  {data.shop?.createdAt?.slice(0, 10)}
+                  {farmerData?.createdAt?.slice(0, 10)}
                 </span>
               </h5>
               <h5 className="font-[600] pt-3">
@@ -384,7 +413,7 @@ const ProductDetailsInfo = ({
                 Total reviews:{" "}
                 <span className="font-[500]">{totalReviewsLength}</span>
               </h5>
-              <Link to="/">
+              <Link to={`/shop/preview/${data?.shop?._id}`}>
                 <div
                   className={`${styles.button} !rounded-[4px] !h-[39.5px] mt-3`}
                 >

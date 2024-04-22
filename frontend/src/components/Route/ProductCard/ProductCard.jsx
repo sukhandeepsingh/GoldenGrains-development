@@ -22,7 +22,7 @@ import Ratings from "../../Products/Ratings";
 
 const ProductCard = ({ data, isEvent }) => {
   const { wishlist } = useSelector((state) => state.wishlist);
-  const {cart} = useSelector((state) => state.cart);
+  const { cart } = useSelector((state) => state.cart);
   const [click, setClick] = useState(false);
   const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
@@ -65,9 +65,15 @@ const ProductCard = ({ data, isEvent }) => {
 
   return (
     <>
-      <div className="w-full h-[370px] bg-white rounded-lg shadow-sm p-3 relative cursor-pointer">
+      {/* <div className="w-full h-[370px] bg-white rounded-lg shadow-sm p-3 relative cursor-pointer">
         <div className="flex justify-end"></div>
-        <Link to={`${isEvent === true ? `/product/${data._id}?isEvent=true` : `/product/${data._id}`}`}>
+        <Link
+          to={`${
+            isEvent === true
+              ? `/product/${data._id}?isEvent=true`
+              : `/product/${data._id}`
+          }`}
+        >
           <img
             src={`${backend_url}${data.images && data.images[0]}`}
             alt=""
@@ -77,7 +83,13 @@ const ProductCard = ({ data, isEvent }) => {
         <Link to={`/shop/preview/${data?.shop._id}`}>
           <h5 className={`${styles.shop_name}`}>{data.shop.name}</h5>
         </Link>
-        <Link to={`${isEvent === true ? `/product/${data._id}?isEvent=true` : `/product/${data._id}`}`}>
+        <Link
+          to={`${
+            isEvent === true
+              ? `/product/${data._id}?isEvent=true`
+              : `/product/${data._id}`
+          }`}
+        >
           <h4 className="pb-3 font-[500]">
             {data.name.length > 40 ? data.name.slice(0, 40) + "..." : data.name}
           </h4>
@@ -104,7 +116,6 @@ const ProductCard = ({ data, isEvent }) => {
           </div>
         </Link>
 
-        {/* side options */}
         <div>
           {click ? (
             <AiFillHeart
@@ -139,7 +150,99 @@ const ProductCard = ({ data, isEvent }) => {
           />
           {open ? <ProductDetailsCard setOpen={setOpen} data={data} /> : null}
         </div>
+      </div> */}
+
+      <div className="w-full h-[370px] bg-transparent border-slate-400 border-[1pt] rounded-lg shadow-sm relative cursor-pointer flex flex-col hover:scale-105 hover:shadow-lg">
+        <div className="w-full h-[55%] rounded-t-lg">
+          <Link
+            to={`${
+              isEvent === true
+                ? `/product/${data._id}?isEvent=true`
+                : `/product/${data._id}`
+            }`}
+          >
+            <img
+              src={`${backend_url}${data.images && data.images[0]}`}
+              alt=""
+              className="w-full h-full object-fill rounded-t-lg"
+            />
+          </Link>
+        </div>
+        {/* bottom 50% */}
+        <div className="w-full h-[45%] px-2 py-3">
+          <Link
+            to={`${
+              isEvent === true
+                ? `/product/${data._id}?isEvent=true`
+                : `/product/${data._id}`
+            }`}
+          >
+            <h4 className="pb-3 font-[500]">
+              {data.name.length > 40
+                ? data.name.slice(0, 30) + "..."
+                : data.name}
+            </h4>
+
+            <div className="flex">
+              <Ratings rating={data?.ratings} />
+            </div>
+
+            <div className="py-3 flex items-center justify-between">
+              <div className="flex">
+                <h5 className={`${styles.productDiscountPrice}`}>
+                  Rs.{" "}
+                  {data.originalPrice === 0
+                    ? data.originalPrice
+                    : data.discountPrice}
+                </h5>
+                <h4 className={`${styles.price}`}>
+                  {data.originalPrice ? "Rs." + data.originalPrice : null}
+                </h4>
+              </div>
+            </div>
+          </Link>
+          <div className="flex w-full justify-end absolute right-2 bottom-2">
+            <div className="flex px-2">
+            {click ? (
+              <AiFillHeart
+                size={22}
+                className="cursor-pointer"
+                onClick={() => removeFromWishlistHandler(data)}
+                color={click ? "red" : "#333"}
+                title="Remove from wishlist"
+              />
+            ) : (
+              <AiOutlineHeart
+                size={22}
+                className="cursor-pointer"
+                onClick={() => addToWishlistHandler(data)}
+                color={click ? "red" : "#333"}
+                title="Add to wishlist"
+              />
+            )}
+            </div>
+            <div className="flex px-2">
+            <AiOutlineEye
+              size={22}
+              className="cursor-pointer"
+              onClick={() => setOpen(!open)}
+              color="#333"
+              title="Quick view"
+            />
+            </div>
+            <div className="flex px-2">
+            <AiOutlineShoppingCart
+              size={22}
+              className="cursor-pointer"
+              onClick={() => addToCartHandler(data._id)}
+              color="#444"
+              title="Add to trolley"
+            />
+            </div>
+          </div>
+        </div>
       </div>
+      {open ? <ProductDetailsCard setOpen={setOpen} data={data} /> : null}
     </>
   );
 };

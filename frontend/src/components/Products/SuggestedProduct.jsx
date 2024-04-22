@@ -19,9 +19,9 @@ const SuggestedProduct = ({ data }) => {
       {data ? (
         <div className={`${styles.section} p-4`}>
           <h2
-            className={`${styles.heading} text-[25px] font[500] border-b mb-5`}
+            className={`text-center md:text-start font-[600] font-Roboto pb-[15px] text-[25px] font[500] border-b mb-5`}
           >
-            Similar Products in this category
+            Other Products in this category
           </h2>
           <div className="grid grid-cols-1 gap-[20px] md:grid-cols-2 md:gap-[25px] lg:grid-cols-4 lg:gap-[25px] xl:grid-cols-5 xl:gap-[30px] mb-12">
             {
