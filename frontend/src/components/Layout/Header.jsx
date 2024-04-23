@@ -123,12 +123,12 @@ const Header = ({ activeHeading }) => {
         </div>
       </div> */}
 
-      <div className="flex w-full justify-center mt-4 mb-7">
+      <div className="flex w-full justify-center 800px:mt-4 800px:mb-7">
         <div className={`800px:flex 800px:w-[100%] 800px:rounded-[0px] 800px:border-slate-600 800px:border-b-[2pt]`}>
           <div
             className={`${
               active === true ? "shadow-sm top-0 left-0 z-10" : null
-            } transition hidden 800px:flex items-center justify-between w-full h-[70px]`}
+            } transition hidden 800px:flex items-center justify-between 800px:pb-3 w-full h-[70px]`}
           >
             <div
               className={`${styles.section} relative ${styles.normalFlex} justify-between`}
@@ -247,28 +247,28 @@ const Header = ({ activeHeading }) => {
       <div
         className={`${
           active === true ? "shadow-sm fixed top-0 left-0 z-10" : null
-        } w-full h-[70px] bg-[#fff] z-50 top-0 left-0 shadow-sm 800px:hidden`}
+        } w-full h-[52pt] bg-[#fff] z-50 top-0 left-0 shadow-sm 800px:hidden`}
       >
-        <div className="w-full flex items-center justify-between">
+        <div className="w-full h-full flex items-center justify-between">
           <div>
             <BiMenuAltLeft
               size={40}
-              className="ml-4 mt-3"
+              className="ml-4"
               onClick={() => setOpen(true)}
             />
           </div>
-          <div className="h-[15%] w-[15%]">
+          <div className="w-[100px] h-auto flex items-center">
             <Link to="/">
               <img
-                src="https://i.ibb.co/JjF2yN9/smartfarm-main-logo.png"
+                src="https://i.ibb.co/Pg24SHR/weblogo.png"
                 alt="Golden Grains"
-                className="mt-2 cursor-pointer"
+                className="cursor-pointer"
               />
             </Link>
           </div>
           <div>
             <div
-              className="relative mr-[20px] mt-3"
+              className="relative mr-[17pt]"
               onClick={() => setOpenCart(true)}
             >
               <AiOutlineShoppingCart size={30} />

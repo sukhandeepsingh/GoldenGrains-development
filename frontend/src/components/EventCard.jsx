@@ -31,8 +31,8 @@ const EventCard = ({ active, data }) => {
         active ? "unset" : "mb-9"
       } lg:flex p-2`}
     >
-      <div className="w-full lg:w-[35%] m-auto flex justify-center items-center">
-        <img src={`${backend_url}${data.images[0]}`} alt="" className="flex w-[80%] object-cover p-6" />
+      <div className="w-full md:w-[35%] md:min-w-[400pt] m-auto flex justify-center items-center">
+        <img src={`${backend_url}${data.images[0]}`} alt="" className="flex w-[80%] max-w-[400pt] object-cover p-6" />
       </div>
       <div className="w-full lg:w-[65%] flex flex-col justify-center">
         <h2 className={`${styles.productTitle}`}>{data.name}</h2>

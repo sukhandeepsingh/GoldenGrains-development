@@ -27,7 +27,7 @@ const Navbar = ({ active }) => {
         </div> */}
 
       <div className="800px:flex relative items-center">
-        <div className="flex cursor-pointer items-center">
+        <div className="flex cursor-pointer items-center 800px:hover:scale-105">
           <Link
             to="/"
             className={`${
@@ -68,13 +68,13 @@ const Navbar = ({ active }) => {
             to="/categories"
             className={`${
               pathname === "/categories"
-                ? "text-[#279736] 800px:text-[#fff] 800px:bg-slate-900 800px:rounded-full 800px:h-[27px]"
-                : "text-black 800px:text-[#000] 800px:border-slate-900 800px:rounded-full 800px:border-[1px]"
-            } pb-[30px] 800px:pb-0 font-[500] px-4 cursor-pointer 800px:mr-[2pt]`}
+                ? "text-[#279736] 800px:text-[#fff] 800px:bg-slate-900 800px:h-[27px]"
+                : "text-black 800px:text-[#000] 800px:border-slate-900 800px:border-[1px]"
+            } pb-[30px] 800px:pb-0 font-[500] px-4 cursor-pointer 800px:mr-[2pt] 800px:rounded-full`}
           >
             Categories
           </Link>
-          <div className="absolute">
+          <div className="absolute z-50">
           {dropDown ? (
             <DropDown
               categoriesData={categoriesData}
@@ -83,7 +83,7 @@ const Navbar = ({ active }) => {
           ) : null}
           </div>
         </div>
-        <div className="flex cursor-pointer">
+        <div className="flex cursor-pointer 800px:hover:scale-105">
           <Link
             to="/products"
             className={`${
@@ -95,7 +95,7 @@ const Navbar = ({ active }) => {
             Products
           </Link>
         </div>
-        <div className="flex cursor-pointer">
+        <div className="flex cursor-pointer 800px:hover:scale-105">
           <Link
             to="/events"
             className={`${
@@ -107,7 +107,7 @@ const Navbar = ({ active }) => {
             Events
           </Link>
         </div>
-        <div className="flex cursor-pointer">
+        <div className="flex cursor-pointer 800px:hover:scale-105">
           <Link
             to="/faq"
             className={`${
@@ -119,7 +119,7 @@ const Navbar = ({ active }) => {
             FAQ
           </Link>
         </div>
-        <div className="hidden 800px:flex cursor-pointer 800px:border-slate-900 800px:rounded-full 800px:border-[1px]">
+        <div className="hidden 800px:flex cursor-pointer 800px:border-slate-900 800px:rounded-full 800px:border-[1px] 800px:hover:scale-105">
           {isSeller ? (
             <Link to="/dashboard" className="text-[#000] flex px-4 items-center pb-[30px] 800px:pb-0 font-[500]">
                 Farmer Dashboard 

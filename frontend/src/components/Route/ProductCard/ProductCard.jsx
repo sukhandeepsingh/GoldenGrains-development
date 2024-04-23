@@ -152,7 +152,7 @@ const ProductCard = ({ data, isEvent }) => {
         </div>
       </div> */}
 
-      <div className="w-full h-[370px] bg-transparent border-slate-400 border-[1pt] rounded-lg shadow-sm relative cursor-pointer flex flex-col hover:scale-105 hover:shadow-lg">
+      <div className="w-full max-w-[280pt] h-[370px] bg-transparent border-slate-400 border-[1pt] rounded-lg shadow-sm relative cursor-pointer flex flex-col hover:scale-105 hover:shadow-lg">
         <div className="w-full h-[55%] rounded-t-lg">
           <Link
             to={`${
