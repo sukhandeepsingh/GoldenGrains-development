@@ -7,16 +7,20 @@ import FeaturedProduct from "../components/Route/FeaturedProduct/FeaturedProduct
 import Events from "../components/Events/Events";
 import Sponsored from "../components/Route/Sponsored";
 import Footer from "../components/Layout/Footer";
+import WhyChooseUs from "../components/Route/WhyChooseUs";
+import TopFarmers from "../components/Route/TopFarmers";
 
 const HomePage = () => {
   return (
     <div>
         <Header activeHeading={1} />
         <Hero />
+        <WhyChooseUs />
         <Categories />
         <BestDeals />
         <Events />
         <FeaturedProduct />
+        <TopFarmers />
         <Sponsored />
         <Footer />
     </div>
