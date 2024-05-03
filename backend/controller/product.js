@@ -111,6 +111,71 @@ router.get(
   })
 );
 
+// all products on all products page with sort, filter and pagination
+router.get(
+  "/get-all-products-main",
+  catchAsyncErrors(async (req, res, next) => {
+    try {
+      const { page, category, sort } = req.query;
+      const limit = parseInt(req.query.limit) || 10;
+      const skip = (page - 1) * limit;
+
+      let query = {};
+      if (category) {
+        query.category = { $in: category.split(",") };
+      }
+
+      let sortCriteria = { createdAt: -1 };
+      if (sort === "price_asc") {
+        sortCriteria = { discountPrice: 1 };
+      } else if (sort === "price_dec") {
+        sortCriteria = { discountPrice: -1 };
+      } else if (sort === "name_asc") {
+        sortCriteria = { name: 1 };
+      } else if (sort === "name_dec") {
+        sortCriteria = { name: -1 };
+      }
+
+      const startIndex = (page - 1) * limit;
+      const endIndex = page * limit;
+
+      const maxproducts = (await Product.find()).length;
+      const products = await Product.find(query)
+        .sort(sortCriteria)
+        .limit(limit)
+        .skip(startIndex);
+
+      const totalProducts = await Product.countDocuments();
+
+      const pagination = {};
+
+      if (endIndex < totalProducts) {
+        pagination.next = {
+          page: page + 1,
+          limit: limit
+        };
+      }
+
+      if (startIndex > 0) {
+        pagination.prev = {
+          page: page - 1,
+          limit: limit
+        };
+      }
+
+      res.status(200).json({
+        success: true,
+        count: maxproducts,
+        pagination,
+        products
+      });
+    } catch (error) {
+      return next(new ErrorHandler(error, 400));
+    }
+  })
+);
+
+
 // product review by user
 router.put(
   "/create-new-review",
@@ -151,6 +216,15 @@ router.put(
       product.ratings = avg / product.reviews.length;
 
       await product.save({ validateBeforeSave: false });
+
+      // Update the average rating of the shop
+      const shop = await Shop.findById(product.shopId);
+
+      const avgRating = (shop.rating * shop.ratingCount + rating) / (shop.ratingCount + 1);
+      shop.rating = avgRating.toFixed(1);
+      shop.ratingCount += 1;
+
+      await shop.save({ validateBeforeSave: false });
 
       await Order.findByIdAndUpdate(
         orderId,

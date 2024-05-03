@@ -27,12 +27,12 @@ const EventCard = ({ active, data }) => {
   }
   return (
     <div
-      className={`w-full block bg-white rounded-lg ${
+      className={`w-full block rounded-lg ${
         active ? "unset" : "mb-9"
-      } lg:flex p-2`}
+      } md:flex p-2 border-[1pt] border-slate-600 md:max-h-[300pt]`}
     >
-      <div className="w-full md:w-[35%] md:min-w-[400pt] m-auto flex justify-center items-center">
-        <img src={`${backend_url}${data.images[0]}`} alt="" className="flex w-[80%] max-w-[400pt] object-cover p-6" />
+      <div className="w-full md:w-[40%] md:min-w-[350pt] lg:min-w-[400pt] max-h-[200pt] sm:max-h-[250pt] md:max-h-[285pt] m-auto flex justify-center items-center">
+        <img src={`${backend_url}${data?.images[0]}`} alt="" className="flex w-full rounded-[8pt] md:w-[70%] lg:w-[80%] max-w-[400pt] max-h-[200pt] sm:max-h-[250pt] md:max-h-[285pt] object-cover p-6" />
       </div>
       <div className="w-full lg:w-[65%] flex flex-col justify-center">
         <h2 className={`${styles.productTitle}`}>{data.name}</h2>
@@ -46,17 +46,14 @@ const EventCard = ({ active, data }) => {
               Rs. {data.discountPrice}
             </h5>
           </div>
-          {/* <span className="pr-3 font-[400] text-[17px] text-[#44a55e]">
-            {data.sold_out} sold
-          </span> */}
         </div>
         <CountDown data={data} />
         <br />
         <div className="flex items-center">
           <Link to={`/product/${data._id}?isEvent=true`}>
-            <div className={`${styles.button} !rounded-[4pt] !h-[30pt] text-[#fff]`}>See details</div>
+            <div className={`${styles.button} !rounded-[4pt] !w-auto !p-4 !bg-[#3947c7] !h-[30pt] text-[#fff]`}>See details</div>
           </Link>
-          <div className={`${styles.button} !rounded-[4pt] !h-[30pt] text-[#fff] ml-5`} onClick={() => addToCartHandler(data)}>Add to cart</div>
+          <div className={`${styles.button} !rounded-[4pt] !w-auto !p-4 !bg-[#279736] !h-[30pt] text-[#fff] ml-5`} onClick={() => addToCartHandler(data)}>Add to cart</div>
         </div>
       </div>
     </div>

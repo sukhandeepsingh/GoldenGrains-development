@@ -29,7 +29,7 @@ const Events = () => {
         <div className={`${styles.section}`}>
 
           <div className="w-full grid mb-4">
-            {allEvents.length !== 0 ? (
+            {allEvents?.length !== 0 ? (
               <EventCard data={allEvents && allEvents[0]} />
             ) : (
               <>

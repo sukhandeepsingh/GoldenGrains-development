@@ -27,14 +27,14 @@ const Navbar = ({ active }) => {
         </div> */}
 
       <div className="800px:flex relative items-center">
-        <div className="flex cursor-pointer items-center 800px:hover:scale-105">
+        <div className="flex cursor-pointer items-center 800px:hover:scale-105 transition-all duration-200">
           <Link
             to="/"
             className={`${
               pathname === "/"
                 ? "text-[#279736] 800px:text-[#fff] 800px:bg-slate-900 800px:rounded-full 800px:h-[27px]"
                 : "text-black 800px:text-[#000] 800px:border-slate-900 800px:rounded-full 800px:border-[1px]"
-            } pb-[30px] 800px:pb-0 font-[500] px-4 cursor-pointer 800px:mr-[2pt]`}
+            } pb-[30px] 800px:pb-0 font-[500] px-4 cursor-pointer 800px:mr-[3pt]`}
           >
             Home
           </Link>
@@ -46,18 +46,10 @@ const Navbar = ({ active }) => {
               pathname === "/categories"
                 ? "text-[#279736] 800px:text-[#fff] 800px:bg-slate-900 800px:rounded-full 800px:h-[27px]"
                 : "text-black 800px:text-[#000] 800px:border-slate-900 800px:rounded-full 800px:border-[1px]"
-            } pb-[30px] 800px:pb-0 font-[500] px-4 cursor-pointer 800px:mr-[2pt]`}
+            } pb-[30px] 800px:pb-0 font-[500] px-4 cursor-pointer 800px:mr-[3pt]`}
           >
             Categories
           </Link>
-          <div className="absolute">
-          {dropDown ? (
-            <DropDown
-              categoriesData={categoriesData}
-              setDropDown={setDropDown}
-            />
-          ) : null}
-          </div>
         </div>
         <div
           className="hidden 800px:flex relative cursor-pointer"
@@ -70,7 +62,7 @@ const Navbar = ({ active }) => {
               pathname === "/categories"
                 ? "text-[#279736] 800px:text-[#fff] 800px:bg-slate-900 800px:h-[27px]"
                 : "text-black 800px:text-[#000] 800px:border-slate-900 800px:border-[1px]"
-            } pb-[30px] 800px:pb-0 font-[500] px-4 cursor-pointer 800px:mr-[2pt] 800px:rounded-full`}
+            } pb-[30px] 800px:pb-0 font-[500] px-4 cursor-pointer 800px:mr-[3pt] 800px:rounded-full`}
           >
             Categories
           </Link>
@@ -83,43 +75,43 @@ const Navbar = ({ active }) => {
           ) : null}
           </div>
         </div>
-        <div className="flex cursor-pointer 800px:hover:scale-105">
+        <div className="flex cursor-pointer 800px:hover:scale-105 transition-all duration-200">
           <Link
             to="/products"
             className={`${
               pathname === "/products"
                 ? "text-[#279736] 800px:text-[#fff] 800px:bg-slate-900 800px:rounded-full 800px:h-[27px]"
                 : "text-black 800px:text-[#000] 800px:border-slate-900 800px:rounded-full 800px:border-[1px]"
-            } pb-[30px] 800px:pb-0 font-[500] px-4 cursor-pointer 800px:mr-[2pt]`}
+            } pb-[30px] 800px:pb-0 font-[500] px-4 cursor-pointer 800px:mr-[3pt]`}
           >
             Products
           </Link>
         </div>
-        <div className="flex cursor-pointer 800px:hover:scale-105">
+        <div className="flex cursor-pointer 800px:hover:scale-105 transition-all duration-200">
           <Link
             to="/events"
             className={`${
               pathname === "/events"
                 ? "text-[#279736] 800px:text-[#fff] 800px:bg-slate-900 800px:rounded-full 800px:h-[27px]"
                 : "text-black 800px:text-[#000] 800px:border-slate-900 800px:rounded-full 800px:border-[1px]"
-            } pb-[30px] 800px:pb-0 font-[500] px-4 cursor-pointer 800px:mr-[2pt]`}
+            } pb-[30px] 800px:pb-0 font-[500] px-4 cursor-pointer 800px:mr-[3pt]`}
           >
             Events
           </Link>
         </div>
-        <div className="flex cursor-pointer 800px:hover:scale-105">
+        <div className="flex cursor-pointer 800px:hover:scale-105 transition-all duration-200">
           <Link
             to="/faq"
             className={`${
               pathname === "/faq"
                 ? "text-[#279736] 800px:text-[#fff] 800px:bg-slate-900 800px:rounded-full 800px:h-[27px]"
                 : "text-black 800px:text-[#000] 800px:border-slate-900 800px:rounded-full 800px:border-[1px]"
-            } pb-[30px] 800px:pb-0 font-[500] px-4 cursor-pointer 800px:mr-[2pt]`}
+            } pb-[30px] 800px:pb-0 font-[500] px-4 cursor-pointer 800px:mr-[3pt]`}
           >
             FAQ
           </Link>
         </div>
-        <div className="hidden 800px:flex cursor-pointer 800px:border-slate-900 800px:rounded-full 800px:border-[1px] 800px:hover:scale-105">
+        <div className="hidden 800px:flex cursor-pointer 800px:border-slate-900 800px:rounded-full 800px:border-[1px] 800px:hover:scale-105 transition-all duration-200">
           {isSeller ? (
             <Link to="/dashboard" className="text-[#000] flex px-4 items-center pb-[30px] 800px:pb-0 font-[500]">
                 Farmer Dashboard 

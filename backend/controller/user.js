@@ -404,4 +404,64 @@ router.delete(
   })
 );
 
+// Function to generate reset password token
+const createResetPasswordToken = (user) => {
+  return jwt.sign(user, process.env.RESET_PASSWORD_SECRET, { expiresIn: '5m' });
+};
+
+// Route to request password reset
+router.post('/forgot-password', async (req, res, next) => {
+  try {
+    const { email } = req.body;
+
+    // Find user by email
+    const user = await User.findOne({ email });
+    if (!user) {
+      return next(new ErrorHandler('User not found', 404));
+    }
+
+    // Generate reset password token
+    const resetToken = createResetPasswordToken({ email: user.email });
+
+    // Construct reset password URL
+    const resetUrl = `http://localhost:3000/reset-password/${resetToken}`;
+
+    // Send password reset email
+    await sendMail({
+      email: user.email,
+      subject: 'Reset password - GoldenGrains',
+      message: `Hello ${user.name}, click on this link to reset your password: ${resetUrl}\n\nThe link will expire in 5 minutes from now.\nIf you did not request this, please ignore this email.`,
+    });
+
+    res.status(200).json({ success: true, message: 'Password reset link sent to your email' });
+  } catch (error) {
+    return next(new ErrorHandler(error.message, 500));
+  }
+});
+
+// Route to reset password
+router.post('/reset-password/:resetToken', async (req, res, next) => {
+  try {
+    const { resetToken } = req.params;
+    const { newPassword } = req.body;
+
+    // Verify reset password token
+    const decoded = jwt.verify(resetToken, process.env.RESET_PASSWORD_SECRET);
+
+    // Find user by email
+    const user = await User.findOne({ email: decoded.email });
+    if (!user) {
+      return next(new ErrorHandler('Invalid token', 400));
+    }
+
+    // Update user's password
+    user.password = newPassword; // Password should be hashed before storing in a production environment
+    await user.save();
+
+    res.status(200).json({ success: true, message: 'Password reset successfully' });
+  } catch (error) {
+    return next(new ErrorHandler(error.message, 500));
+  }
+});
+
 module.exports = router;

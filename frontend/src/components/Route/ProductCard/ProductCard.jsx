@@ -3,13 +3,9 @@ import { Link } from "react-router-dom";
 import styles from "../../../styles/styles";
 import {
   AiFillHeart,
-  AiFillStar,
-  AiOutlineEye,
   AiOutlineHeart,
   AiOutlineShoppingCart,
-  AiOutlineStar,
 } from "react-icons/ai";
-import ProductDetailsCard from "../ProductDetailsCard/ProductDetailsCard";
 import { backend_url } from "../../../server";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -24,7 +20,6 @@ const ProductCard = ({ data, isEvent }) => {
   const { wishlist } = useSelector((state) => state.wishlist);
   const { cart } = useSelector((state) => state.cart);
   const [click, setClick] = useState(false);
-  const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
 
   // const d = data.name;
@@ -54,105 +49,18 @@ const ProductCard = ({ data, isEvent }) => {
       toast.error("Item already added to trolley!");
     } else {
       if (data.stock < 1) {
-        toast.error("Product stock limited!");
+        toast.error("Not enough itemsin stock!");
       } else {
         const cartData = { ...data, qty: 1 };
         dispatch(addTocart(cartData));
-        toast.success("Item added to trolley successfully!");
+        toast.success("Added to trolley!");
       }
     }
   };
 
   return (
     <>
-      {/* <div className="w-full h-[370px] bg-white rounded-lg shadow-sm p-3 relative cursor-pointer">
-        <div className="flex justify-end"></div>
-        <Link
-          to={`${
-            isEvent === true
-              ? `/product/${data._id}?isEvent=true`
-              : `/product/${data._id}`
-          }`}
-        >
-          <img
-            src={`${backend_url}${data.images && data.images[0]}`}
-            alt=""
-            className="w-full h-[170px] object-contain"
-          />
-        </Link>
-        <Link to={`/shop/preview/${data?.shop._id}`}>
-          <h5 className={`${styles.shop_name}`}>{data.shop.name}</h5>
-        </Link>
-        <Link
-          to={`${
-            isEvent === true
-              ? `/product/${data._id}?isEvent=true`
-              : `/product/${data._id}`
-          }`}
-        >
-          <h4 className="pb-3 font-[500]">
-            {data.name.length > 40 ? data.name.slice(0, 40) + "..." : data.name}
-          </h4>
-
-          <div className="flex">
-            <Ratings rating={data?.ratings} />
-          </div>
-
-          <div className="py-2 flex items-center justify-between">
-            <div className="flex">
-              <h5 className={`${styles.productDiscountPrice}`}>
-                Rs.{" "}
-                {data.originalPrice === 0
-                  ? data.originalPrice
-                  : data.discountPrice}
-              </h5>
-              <h4 className={`${styles.price}`}>
-                {data.originalPrice ? "Rs." + data.originalPrice : null}
-              </h4>
-            </div>
-            <span className="font-[400] text-[17px] text-[#68d284]">
-              {data?.sold_out} sold
-            </span>
-          </div>
-        </Link>
-
-        <div>
-          {click ? (
-            <AiFillHeart
-              size={22}
-              className="cursor-pointer absolute right-2 top-5"
-              onClick={() => removeFromWishlistHandler(data)}
-              color={click ? "red" : "#333"}
-              title="Remove from wishlist"
-            />
-          ) : (
-            <AiOutlineHeart
-              size={22}
-              className="cursor-pointer absolute right-2 top-5"
-              onClick={() => addToWishlistHandler(data)}
-              color={click ? "red" : "#333"}
-              title="Add to wishlist"
-            />
-          )}
-          <AiOutlineEye
-            size={22}
-            className="cursor-pointer absolute right-2 top-14"
-            onClick={() => setOpen(!open)}
-            color="#333"
-            title="Quick view"
-          />
-          <AiOutlineShoppingCart
-            size={25}
-            className="cursor-pointer absolute right-2 top-24"
-            onClick={() => addToCartHandler(data._id)}
-            color="#444"
-            title="Add to trolley"
-          />
-          {open ? <ProductDetailsCard setOpen={setOpen} data={data} /> : null}
-        </div>
-      </div> */}
-
-      <div className="w-full max-w-[280pt] h-[370px] bg-transparent border-slate-400 border-[1pt] rounded-lg shadow-sm relative cursor-pointer flex flex-col hover:scale-105 hover:shadow-lg">
+      <div className="w-full max-w-[280pt] min-w-[195px] h-[400px] bg-transparent border-slate-400 border-[1pt] rounded-lg shadow-sm relative cursor-pointer flex flex-col hover:scale-[1.03] hover:shadow-xl transition-transform">
         <div className="w-full h-[55%] rounded-t-lg">
           <Link
             to={`${
@@ -164,85 +72,83 @@ const ProductCard = ({ data, isEvent }) => {
             <img
               src={`${backend_url}${data.images && data.images[0]}`}
               alt=""
-              className="w-full h-full object-fill rounded-t-lg"
+              className="w-full h-full object-cover rounded-t-lg"
             />
           </Link>
         </div>
-        {/* bottom 50% */}
-        <div className="w-full h-[45%] px-2 py-3">
-          <Link
-            to={`${
-              isEvent === true
-                ? `/product/${data._id}?isEvent=true`
-                : `/product/${data._id}`
-            }`}
-          >
-            <h4 className="pb-3 font-[500]">
-              {data.name.length > 40
-                ? data.name.slice(0, 30) + "..."
-                : data.name}
-            </h4>
 
+        <div className="w-full h-[45%] px-2 py-3">
+            <div className="flex mb-3 justify-between items-center">
+              <div className=" w-[85%]">
+              <Link
+                to={`${
+                  isEvent === true
+                    ? `/product/${data._id}?isEvent=true`
+                    : `/product/${data._id}`
+                }`}
+              >
+              <h4 className="font-[500]">
+                {data.name.length > 20
+                  ? data.name.slice(0, 20) + "..."
+                  : data.name}
+              </h4>
+              </Link>
+              </div>
+              <div className="flex w-[15%] justify-end items-center">
+              {click ? (
+                <AiFillHeart
+                  size={22}
+                  className="cursor-pointer"
+                  onClick={() => removeFromWishlistHandler(data)}
+                  color={click ? "red" : "#222"}
+                  title="Remove from wishlist"
+                />
+              ) : (
+                <AiOutlineHeart
+                  size={22}
+                  className="cursor-pointer"
+                  onClick={() => addToWishlistHandler(data)}
+                  color={click ? "red" : "#222"}
+                  title="Add to wishlist"
+                />
+              )}
+              </div>
+            </div>
+            <Link
+              to={`${
+                isEvent === true
+                  ? `/product/${data._id}?isEvent=true`
+                  : `/product/${data._id}`
+              }`}
+            >
             <div className="flex">
               <Ratings rating={data?.ratings} />
             </div>
-
-            <div className="py-3 flex items-center justify-between">
-              <div className="flex">
-                <h5 className={`${styles.productDiscountPrice}`}>
+            <div className="py-2 flex items-center justify-between">
+              <div className="flex items-center">
+                <h4 className={`text-[12pt] text-[#444] line-through pr-2`}>
+                  {data.originalPrice ? "Rs." + data.originalPrice : null}
+                </h4>
+                <h5 className={`text-[14pt] text-[#268032] font-[500]`}>
                   Rs.{" "}
                   {data.originalPrice === 0
                     ? data.originalPrice
                     : data.discountPrice}
                 </h5>
-                <h4 className={`${styles.price}`}>
-                  {data.originalPrice ? "Rs." + data.originalPrice : null}
-                </h4>
               </div>
             </div>
           </Link>
-          <div className="flex w-full justify-end absolute right-2 bottom-2">
-            <div className="flex px-2">
-            {click ? (
-              <AiFillHeart
-                size={22}
-                className="cursor-pointer"
-                onClick={() => removeFromWishlistHandler(data)}
-                color={click ? "red" : "#333"}
-                title="Remove from wishlist"
-              />
-            ) : (
-              <AiOutlineHeart
-                size={22}
-                className="cursor-pointer"
-                onClick={() => addToWishlistHandler(data)}
-                color={click ? "red" : "#333"}
-                title="Add to wishlist"
-              />
-            )}
-            </div>
-            <div className="flex px-2">
-            <AiOutlineEye
-              size={22}
-              className="cursor-pointer"
-              onClick={() => setOpen(!open)}
-              color="#333"
-              title="Quick view"
-            />
-            </div>
-            <div className="flex px-2">
-            <AiOutlineShoppingCart
-              size={22}
-              className="cursor-pointer"
+          <div className="flex items-center">
+            <button className="bg-[#279736] flex justify-between items-center hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full w-full"
               onClick={() => addToCartHandler(data._id)}
-              color="#444"
               title="Add to trolley"
-            />
-            </div>
+            >
+              Add to trolley
+              <AiOutlineShoppingCart size={18} />
+            </button>
           </div>
         </div>
       </div>
-      {open ? <ProductDetailsCard setOpen={setOpen} data={data} /> : null}
     </>
   );
 };

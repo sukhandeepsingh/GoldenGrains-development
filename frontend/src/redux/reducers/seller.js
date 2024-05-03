@@ -32,6 +32,19 @@ export const sellerReducer = createReducer(initialState, {
     state.error = action.payload;
   },
 
+  // top farmers for homepage
+  topFarmersRequest: (state) => {
+    state.isLoading = true;
+  },
+  topFarmersSuccess: (state, action) => {
+    state.isLoading = false;
+    state.topFarmers = action.payload;
+  },
+  topFarmersFailed: (state, action) => {
+    state.isLoading = false;
+    state.error = action.payload;
+  },
+
   clearErrors: (state) => {
     state.error = null;
   },

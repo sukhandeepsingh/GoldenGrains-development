@@ -353,4 +353,103 @@ router.delete(
   })
 );
 
+// x
+// Universal top farmers list
+router.get(
+  "/top-farmers",
+  catchAsyncErrors(async (req, res, next) => {
+    try {
+      // Fetch all sellers sorted by their ratings in descending order
+      const topFarmers = await Shop.find({ ratingCount: { $gte: 100 } })
+        .select('_id name description avatar rating ratingCount createdAt')
+        .sort({ rating: -1, createdAt: 1, ratingCount: -1 })
+        .limit(4);
+
+      // Send the top farmers data in the response
+      res.status(200).json({
+        success: true,
+        topFarmers,
+      });
+    } catch (error) {
+      // Handle errors
+      return next(new ErrorHandler(error.message, 500));
+    }
+  })
+);
+
+// request password reset
+router.post('/forgot-password', async (req, res, next) => {
+  const { email } = req.body;
+
+  try {
+    // Find seller by email
+    const seller = await Shop.findOne({ email });
+
+    if (!seller) {
+      return next(new ErrorHandler('Seller not found with this email', 404));
+    }
+
+    // Get reset token
+    const resetToken = jwt.sign({ id: seller._id }, process.env.RESET_PASSWORD_SECRET, { expiresIn: '5m' });
+
+    // Create reset password URL
+    const resetUrl = `http://localhost:3000/reset-password-farmer/${resetToken}`;
+
+    // Send reset password link via email
+    await sendMail({
+      email: seller.email,
+      subject: 'Reset Farmer Password - GoldenGrains',
+      message: `You are receiving this email because a password reset request has been initiated for your account.\n\nPlease click on the following link to reset your password:\n\n${resetUrl}\n\nThe link will expire in 5 minutes from now.\nIf you did not request this, please ignore this email.`,
+    });
+
+    res.status(200).json({
+      success: true,
+      message: `Password reset link has been sent to ${seller.email}`,
+    });
+  } catch (error) {
+    return next(new ErrorHandler(error.message, 500));
+  }
+});
+
+// reset password
+router.put('/reset-password-farmer/:resetToken', async (req, res, next) => {
+  const resetToken = req.params.resetToken;
+  const { password } = req.body;
+
+  if (!resetToken || !password) {
+    return next(new ErrorHandler('Invalid reset token or password', 400));
+  }
+
+  try {
+    // Decode reset token
+    const decoded = jwt.verify(resetToken, process.env.RESET_PASSWORD_SECRET);
+  
+    if (!decoded) {
+      return next(new ErrorHandler('Invalid reset token', 400));
+    }
+
+    // Find seller by id from decoded token
+    const seller = await Shop.findById(decoded.id);
+
+    if (!seller) {
+      return next(new ErrorHandler('Seller not found', 404));
+    }
+
+    // Set new password
+    seller.password = password;
+
+    await seller.save();
+
+    res.status(200).json({
+      success: true,
+      message: 'Password updated successfully',
+    });
+  } catch (error) {
+    if (error.name === 'TokenExpiredError') {
+      return next(new ErrorHandler('Reset token has expired', 400));
+    }
+    return next(new ErrorHandler(error.message, 400));
+  }
+});
+
 module.exports = router;

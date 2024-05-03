@@ -113,7 +113,7 @@ router.put(
         order.paymentInfo.status = "Succeeded";
         const platformFee = (order.totalPrice * 0.05).toFixed(2);
         await updateSellerInfo(order.totalPrice - platformFee);
-        await updateSellerInfo(amount);
+        // await updateSellerInfo(amount);
       }
 
       await order.save({ validateBeforeSave: false });

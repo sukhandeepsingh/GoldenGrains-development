@@ -23,3 +23,24 @@ export const getAllSellers = () => async (dispatch) => {
     });
   }
 };
+
+// top farmers for homepage
+export const getTopFarmers = () => async (dispatch) => {
+  try {
+    dispatch({
+      type: "topFarmersRequest",
+    });
+
+    const { data } = await axios.get(`${server}/shop/top-farmers`);
+
+    dispatch({
+      type: "topFarmersSuccess",
+      payload: data.topFarmers,
+    });
+  } catch (error) {
+    dispatch({
+      type: "topFarmersFailed",
+      payload: error.response.data.message,
+    });
+  }
+};

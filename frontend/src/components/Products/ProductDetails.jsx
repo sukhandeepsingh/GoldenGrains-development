@@ -48,7 +48,7 @@ const ProductDetails = ({ data }) => {
       .catch((error) => {
         console.log(error);
       });
-  }, [dispatch, data, farmerData, wishlist]);
+  }, [dispatch, data, wishlist]);
 
   const incrementCount = () => {
     setCount(count + 1);
@@ -85,19 +85,19 @@ const ProductDetails = ({ data }) => {
     }
   };
 
-  const totalReviewsLength =
-    products &&
-    products.reduce((acc, product) => acc + product.reviews.length, 0);
+  // const totalReviewsLength =
+  //   products &&
+  //   products.reduce((acc, product) => acc + product.reviews.length, 0);
 
-  const totalRatings =
-    products &&
-    products.reduce(
-      (acc, product) =>
-        acc + product.reviews.reduce((sum, review) => sum + review.rating, 0),
-      0
-    );
+  // const totalRatings =
+  //   products &&
+  //   products.reduce(
+  //     (acc, product) =>
+  //       acc + product.reviews.reduce((sum, review) => sum + review.rating, 0),
+  //     0
+  //   );
 
-  const averageRating = (totalRatings / totalReviewsLength).toFixed(1) || 0;
+  // const averageRating = (totalRatings / totalReviewsLength).toFixed(1) || 0;
 
   const handleMessageSubmit = async () => {
     if (isAuthenticated) {
@@ -150,43 +150,64 @@ const ProductDetails = ({ data }) => {
                           <img
                             src={`${backend_url}${i}`}
                             alt=""
-                            className={`h-[150px] overflow-hidden rounded-lg mr-3 mt-3 ${select === index ? "border-slate-600 scale-105" : "border-slate-300"} border-[1pt] object-fill`}
+                            className={`h-[150px] overflow-hidden rounded-lg mr-3 mt-3 ${
+                              select === index
+                                ? "border-slate-600 scale-105"
+                                : "border-slate-300"
+                            } border-[1pt] object-fill`}
                             onClick={() => setSelect(index)}
                           />
                         </div>
                       ))}
-                    {/* <div
-                      className={`${
-                        select === 1 ? "border" : "null"
-                      } cursor-pointer`}
-                    >
-                      <img
-                        src={`${backend_url}${data.images && data.images[0]}`}
-                        alt=""
-                        className="h-[200px]"
-                        onClick={() => setSelect(1)}
-                      />
-                    </div> */}
                   </div>
                 </div>
 
                 {/* data */}
                 <div className="w-full 800px:w-[50%] pt-5">
-                  <h1 className={`${styles.productTitle}`}>{data.name}</h1>
-                  <div className="flex items-center mb-5">
-                  <Ratings rating={data?.ratings} />
-                  {" "}
-                  <span className="text-[10pt]">({data?.ratings}/5)</span>
+                  <div className="flex justify-between">
+                    <h1
+                      className={`text-[25px] font-[500] mb-1 font-Roboto text-[#333]`}
+                    >
+                      {data.name}
+                    </h1>
+                    <div>
+                      {click ? (
+                        <AiFillHeart
+                          size={25}
+                          className="cursor-pointer"
+                          onClick={() => removeFromWishlistHandler(data)}
+                          color={click ? "red" : "#333"}
+                          title="Remove from wishlist"
+                        />
+                      ) : (
+                        <AiOutlineHeart
+                          size={25}
+                          className="cursor-pointer"
+                          onClick={() => addToWishlistHandler(data)}
+                          color={click ? "red" : "#333"}
+                          title="Add to wishlist"
+                        />
+                      )}
+                    </div>
                   </div>
-                  <p className="w-full underline font-[600] text-[14pt]">Description</p>
+                  <div className="flex items-center mb-5">
+                    <Ratings rating={data?.ratings} />{" "}
+                    <span className="text-[10pt]">({data?.ratings}/5)</span>
+                  </div>
+                  <p className="w-full underline font-[600] text-[14pt]">
+                    Description
+                  </p>
                   <p>{data.description}</p>
-                  <div className="flex pt-3 mt-3">
-                    <h4 className={`${styles.productDiscountPrice}`}>
-                      Rs. {data.discountPrice}
-                    </h4>
-                    <h3 className={`${styles.price}`}>
+                  <div className="flex pt-3 mt-3 items-baseline">
+                    <h5 className={`text-[15pt] text-[#268032] font-[600]`}>
+                      Rs.{" "}
+                      {data.originalPrice === 0
+                        ? data.originalPrice
+                        : data.discountPrice}
+                    </h5>
+                    <h4 className={`text-[12pt] text-[#444] line-through pl-2`}>
                       {data.originalPrice ? "Rs." + data.originalPrice : null}
-                    </h3>
+                    </h4>
                   </div>
                   <div className="flex items-center mt-12 justify-between pr-3">
                     <div>
@@ -206,26 +227,6 @@ const ProductDetails = ({ data }) => {
                         +
                       </button>
                     </div>
-
-                    <div>
-                      {click ? (
-                        <AiFillHeart
-                          size={30}
-                          className="cursor-pointer"
-                          onClick={() => removeFromWishlistHandler(data)}
-                          color={click ? "red" : "#333"}
-                          title="Remove from wishlist"
-                        />
-                      ) : (
-                        <AiOutlineHeart
-                          size={30}
-                          className="cursor-pointer"
-                          onClick={() => addToWishlistHandler(data)}
-                          color={click ? "red" : "#333"}
-                          title="Add to wishlist"
-                        />
-                      )}
-                    </div>
                   </div>
                   <div
                     className={`${styles.button} !mt-6 !rounded !h-11 flex items-center`}
@@ -243,24 +244,23 @@ const ProductDetails = ({ data }) => {
                         className="w-[50px] h-[50px] rounded-full mr-2"
                       />
                     </Link>
-                    <div className="pr-8">
+                    <div className="pr-8 block items-center">
                       <Link to={`/shop/preview/${farmerData?._id}`}>
-                        <h3 className={`${styles.shop_name} pb-1 pt-1`}>
+                        <h3 className={`text-[#279736] text-[15px] pb-1 pt-1`}>
                           {farmerData?.name}
                         </h3>
                       </Link>
                       <h5 className="pb-3 text-[15px]">
-                        ({averageRating} of 5) Ratings
+                        ({farmerData?.rating} of 5) Ratings
                       </h5>
                     </div>
-                    <div
-                      className={`${styles.button} bg-[#6443d1] mt-4 !rounded !h-11`}
+                    <button
+                      className="bg-[#279736] flex justify-center items-center hover:bg-green-600 text-white py-2 my-3 px-4 rounded-[4pt]"
+                      title="Contact farmer"
                       onClick={handleMessageSubmit}
                     >
-                      <span className="text-white flex items-center">
-                        Contact farmer <AiOutlineMessage className="ml-1" />
-                      </span>
-                    </div>
+                      Contact Farmer
+                    </button>
                   </div>
                 </div>
               </div>
@@ -273,8 +273,8 @@ const ProductDetails = ({ data }) => {
             <ProductDetailsInfo
               data={data}
               products={products}
-              totalReviewsLength={totalReviewsLength}
-              averageRating={averageRating}
+              // totalReviewsLength={totalReviewsLength}
+              // averageRating={averageRating}
               farmerData={farmerData}
             />
           </div>
@@ -289,8 +289,8 @@ const ProductDetails = ({ data }) => {
 const ProductDetailsInfo = ({
   data,
   products,
-  totalReviewsLength,
-  averageRating,
+  // totalReviewsLength,
+  // averageRating,
   farmerData,
 }) => {
   const [active, setActive] = useState(1);
@@ -300,7 +300,9 @@ const ProductDetailsInfo = ({
         {/* tab 1 */}
         <div className="relative">
           <h5
-            className={`${active === 1 ? "text-[#279736]" : "text-[#000]"} text-[18px] px-1 leading-5 font-[600] cursor-pointer 800px:text-[20px]`}
+            className={`${
+              active === 1 ? "text-[#279736]" : "text-[#000]"
+            } text-[18px] px-1 leading-5 font-[600] cursor-pointer 800px:text-[20px]`}
             onClick={() => setActive(1)}
           >
             Product Details
@@ -313,7 +315,9 @@ const ProductDetailsInfo = ({
         {/* tab 2 */}
         <div className="relative">
           <h5
-            className={`${active === 2 ? "text-[#279736]" : "text-[#000]"} text-[18px] px-1 leading-5 font-[600] cursor-pointer 800px:text-[20px]`}
+            className={`${
+              active === 2 ? "text-[#279736]" : "text-[#000]"
+            } text-[18px] px-1 leading-5 font-[600] cursor-pointer 800px:text-[20px]`}
             onClick={() => setActive(2)}
           >
             Product Reviews
@@ -326,7 +330,9 @@ const ProductDetailsInfo = ({
         {/* tab 3 */}
         <div className="relative">
           <h5
-            className={`${active === 3 ? "text-[#279736]" : "text-[#000]"} text-[18px] px-1 leading-5 font-[600] cursor-pointer 800px:text-[20px]`}
+            className={`${
+              active === 3 ? "text-[#279736]" : "text-[#000]"
+            } text-[18px] px-1 leading-5 font-[600] cursor-pointer 800px:text-[20px]`}
             onClick={() => setActive(3)}
           >
             Farmer Details
@@ -375,23 +381,25 @@ const ProductDetailsInfo = ({
         <div className="w-full block 800px:flex p-5">
           {/* left half */}
           <div className="w-full 800px:w-[50%]">
-            <Link to={`/shop/preview/${data?.shop?._id}`}>
-              <div className="flex items-center">
+            <div className="flex items-center w-fit">
+              <Link to={`/shop/preview/${data?.shop?._id}`}>
+                <div className="flex items-center">
                 <img
                   src={`${backend_url}${farmerData?.avatar}`}
                   alt=""
                   className="w-[50px] h-[50px] rounded-full"
                 />
-                <div className="pl-3">
-                  <h3 className={`${styles.shop_name} pb-2`}>
+                <div className="pl-3 block items-center">
+                  <h3 className={`text-[#279736] pt-2 text-[15px] pb-1`}>
                     {farmerData?.name}
                   </h3>
                   <h5 className="pb-2 text-[15px]">
-                    ({averageRating}/5) Ratings
+                    ({farmerData?.rating}/5) Ratings
                   </h5>
                 </div>
-              </div>
-            </Link>
+                </div>
+              </Link>
+            </div>
             <p className="pt-2">{data.shop.description}</p>
           </div>
           {/* right half */}
@@ -411,14 +419,15 @@ const ProductDetailsInfo = ({
               </h5>
               <h5 className="font-[600] pt-3">
                 Total reviews:{" "}
-                <span className="font-[500]">{totalReviewsLength}</span>
+                <span className="font-[500]">{farmerData?.ratingCount}</span>
               </h5>
               <Link to={`/shop/preview/${data?.shop?._id}`}>
-                <div
-                  className={`${styles.button} !rounded-[4px] !h-[39.5px] mt-3`}
+                <button
+                  className="bg-[#279736] flex justify-center items-center hover:bg-green-600 text-white py-2 my-3 px-4 rounded-[4pt]"
+                  title="View details"
                 >
-                  <h4 className="text-white">Visit shop</h4>
-                </div>
+                  View details
+                </button>
               </Link>
             </div>
           </div>

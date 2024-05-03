@@ -10,6 +10,7 @@ import Loader from "../Layout/Loader";
 const ShopInfo = ({ isOwner }) => {
   const [data, setData] = useState({});
   const {products} = useSelector((state) => state.products);
+  const { user } = useSelector((state) => state.user);
   const [isLoading, setIsLoading] = useState(false);
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -25,6 +26,7 @@ const ShopInfo = ({ isOwner }) => {
       setIsLoading(false);
     })
   }, []);
+  console.log(user)
 
 
   const logoutHandler = async () => {
@@ -60,21 +62,31 @@ const ShopInfo = ({ isOwner }) => {
               {data.description}
             </p>
           </div>
-          <div className="p-3">
-            <h5 className="font-[600]">Address</h5>
-            <h4 className="text-[#000000a6]">{data.address}</h4>
-          </div>
-          <div className="p-3">
-            <h5 className="font-[600]">Phone Number</h5>
-            <h4 className="text-[#000000a6]">{data.phoneNumber}</h4>
-          </div>
+          {
+            ((user && user?.role === "Admin") || isOwner) && (
+              <>
+                <div className="p-3">
+                  <h5 className="font-[600]">Address</h5>
+                  <h4 className="text-[#000000a6]">{data.address}</h4>
+                </div>
+                <div className="p-3">
+                  <h5 className="font-[600]">Phone Number</h5>
+                  <h4 className="text-[#000000a6]">{data.phoneNumber}</h4>
+                </div>
+                <div className="p-3">
+                  <h5 className="font-[600]">Email</h5>
+                  <h4 className="text-[#000000a6]">{data.email}</h4>
+                </div>
+              </>
+            )
+          }
           <div className="p-3">
             <h5 className="font-[600]">Total Products</h5>
             <h4 className="text-[#000000a6]">{products && products.length}</h4>
           </div>
           <div className="p-3">
             <h5 className="font-[600]">Ratings</h5>
-            <h4 className="text-[#000000a6]">{averageRating} of 5</h4>
+            <h4 className="text-[#000000a6]">{data?.rating} of 5</h4>
           </div>
           <div className="p-3">
             <h5 className="font-[600]">Member Since</h5>

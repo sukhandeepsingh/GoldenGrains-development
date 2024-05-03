@@ -22,6 +22,8 @@ import {
   OrderDetailsPage,
   TrackOrderPage,
   UserInboxPage,
+  ForgotPasswordUserPage,
+  ResetPasswordPage,
 } from "./routes/routes.js";
 import {
   ShopDashboardPage,
@@ -37,6 +39,8 @@ import {
   ShopSettingsPage,
   ShopWithdrawMoneyPage,
   ShopInboxPage,
+  ForgotPasswordFarmerPage,
+  ResetPasswordFarmerPage,
 } from "./routes/ShopRoutes";
 import {
   AdminDashboardPage,
@@ -98,6 +102,8 @@ const App = () => {
         <Route path="/" element={<HomePage />} />
         <Route path="/categories" element={<CategoriesPage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/forgot-password-user" element={<ForgotPasswordUserPage />} />
+        <Route path="/reset-password/:resetToken" element={<ResetPasswordPage />} />
         <Route path="/sign-up" element={<SignupPage />} />
         <Route
           path="/activation/:activation_token"
@@ -157,6 +163,8 @@ const App = () => {
         {/* farmer routes */}
         <Route path="/shop-create" element={<ShopCreatePage />} />
         <Route path="/shop-login" element={<ShopLoginPage />} />
+        <Route path="/forgot-password-farmer" element={<ForgotPasswordFarmerPage />} />
+        <Route path="/reset-password-farmer/:resetToken" element={<ResetPasswordFarmerPage />} />
         <Route
           path="/shop/:id"
           element={

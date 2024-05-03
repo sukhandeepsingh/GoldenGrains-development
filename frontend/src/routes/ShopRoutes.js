@@ -11,6 +11,8 @@ import ShopAllRefunds from "../pages/Shop/ShopAllRefunds";
 import ShopSettingsPage from "../pages/Shop/ShopSettingsPage";
 import ShopWithdrawMoneyPage from "../pages/Shop/ShopWithdrawMoneyPage";
 import ShopInboxPage from "../pages/Shop/ShopInboxPage";
+import ForgotPasswordFarmerPage from "../pages/Shop/ForgotPasswordFarmerPage";
+import ResetPasswordFarmerPage from "../pages/Shop/ResetPasswordFarmerPage";
 
 export {
     ShopDashboardPage,
@@ -26,4 +28,6 @@ export {
     ShopSettingsPage,
     ShopWithdrawMoneyPage,
     ShopInboxPage,
+    ForgotPasswordFarmerPage,
+    ResetPasswordFarmerPage,
 }
