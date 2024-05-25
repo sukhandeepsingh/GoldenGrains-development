@@ -21,7 +21,7 @@ const Events = () => {
           <h1>Popular Events</h1>
         </div>
         <div
-          className={`${styles.button} !h-[34pt] !bg-[#279736] !text-[#fff] !w-auto !px-2 !rounded-[5pt]`}
+          className={`${styles.button} !h-[32pt] !bg-[#279736] !text-[#fff] !w-auto !px-2 !rounded-[5pt]`}
         >
           <Link to="/events">See All Events</Link>
         </div>

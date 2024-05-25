@@ -29,7 +29,7 @@ const Categories = () => {
           <h1>Categories</h1>
         </div>
         <div
-            className={`${styles.button} !h-[34pt] !bg-[#279736] !text-[#fff] !w-auto !px-2 !rounded-[5pt]`}
+            className={`${styles.button} !h-[32pt] !bg-[#279736] !text-[#fff] !w-auto !px-2 !rounded-[5pt]`}
           >
             <Link to="/categories">See All Categories</Link>
           </div>
@@ -46,7 +46,7 @@ const Categories = () => {
               };
               return (
                 <div
-                  className="w-full h-[180px] border-slate-600 border-[1pt] rounded-[8pt] flex items-center justify-center cursor-pointer overflow-hidden hover:scale-105 hover:shadow-lg"
+                  className="w-full h-[180px] border-slate-600 border-[1pt] rounded-[8pt] flex items-center justify-center cursor-pointer overflow-hidden hover:scale-105 hover:shadow-lg transition-all duration-200"
                   key={i.id}
                   onClick={() => handleSubmit(i)}
                 >
@@ -54,7 +54,7 @@ const Categories = () => {
                     <div>
                       <img
                         src={i.image_Url}
-                        className="w-[120px] object-cover aspect-square"
+                        className="w-[120px] object-contain aspect-square"
                         alt=""
                       />
                     </div>

@@ -60,7 +60,7 @@ const ProductCard = ({ data, isEvent }) => {
 
   return (
     <>
-      <div className="w-full max-w-[280pt] min-w-[195px] h-[400px] bg-transparent border-slate-400 border-[1pt] rounded-lg shadow-sm relative cursor-pointer flex flex-col hover:scale-[1.03] hover:shadow-xl transition-transform">
+      <div className="w-full max-w-[280pt] min-w-[195px] h-[400px] bg-transparent border-slate-400 border-[1pt] rounded-lg shadow-sm relative cursor-pointer flex flex-col hover:scale-[1.03] hover:shadow-xl transition-transform duration-200">
         <div className="w-full h-[55%] rounded-t-lg">
           <Link
             to={`${
@@ -72,7 +72,7 @@ const ProductCard = ({ data, isEvent }) => {
             <img
               src={`${backend_url}${data.images && data.images[0]}`}
               alt=""
-              className="w-full h-full object-cover rounded-t-lg"
+              className="w-full h-full object-contain rounded-t-lg"
             />
           </Link>
         </div>

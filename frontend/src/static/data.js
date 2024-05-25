@@ -222,78 +222,157 @@ export const navItems = [
       title: "Fruits",
       subTitle: "",
       image_Url:
-        "https://www.healthyeating.org/images/default-source/home-0.0/nutrition-topics-2.0/general-nutrition-wellness/2-2-2-3foodgroups_fruits_detailfeature.jpg?sfvrsn=64942d53_4",
+        "https://i.ibb.co/cy89n0t/categories-fruit.png",
     },
     {
       id: 2,
       title: "Vegetables",
       subTitle: "",
       image_Url:
-        "https://t2.gstatic.com/licensed-image?q=tbn:ANd9GcRuE3lniXx7IbyDd1pxL5kLA3lAI_hagCSfanks-AsZEw1uolMfCWB_J-CX-9WeAo0v",
+        "https://i.ibb.co/TwFQh0X/categories-vegetables.png",
     },
     {
       id: 3,
       title: "Nuts",
       subTitle: "",
       image_Url:
-        "https://t3.gstatic.com/licensed-image?q=tbn:ANd9GcSCvdFHhwzTDI2E_olCCd_m678XIDuBVqwaMZindtvhizpQDDjP3y4PUk2vJjvmwZ42",
+        "https://i.ibb.co/XXBxdp4/categories-nuts.png",
     },
     {
       id: 4,
       title: "Seeds",
       subTitle: "",
       image_Url:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/%D0%A0%D0%B0%D0%B7%D0%BD%D0%BE%D0%BE%D0%B1%D1%80%D0%B0%D0%B7%D0%B8%D0%B5_%D1%81%D0%B5%D0%BC%D1%8F%D0%BD.jpg/1200px-%D0%A0%D0%B0%D0%B7%D0%BD%D0%BE%D0%BE%D0%B1%D1%80%D0%B0%D0%B7%D0%B8%D0%B5_%D1%81%D0%B5%D0%BC%D1%8F%D0%BD.jpg",
+        "https://i.ibb.co/BTTwmcF/categories-seeds.png",
     },
     {
       id: 5,
       title: "Grains",
       subTitle: "",
       image_Url:
-        "https://static.toiimg.com/thumb/88831105.cms?width=400&height=300&resizemode=4&imgsize=323876",
+        "https://i.ibb.co/Y2pSDWF/categories-grains.png",
     },
     {
       id: 6,
       title: "Spices",
       subTitle: "",
       image_Url:
-        "https://hospitalityinsights.ehl.edu/hubfs/1440/1440x960-spices.jpg",
+        "https://i.ibb.co/WHMR7SG/categories-spices.png",
     },
     {
       id: 7,
       title: "Flowers",
       subTitle: "",
-      image_Url: "https://hips.hearstapps.com/hmg-prod/images/perennial-flowers-and-plants-1674072475.jpeg",
+      image_Url: "https://i.ibb.co/b73bZ4H/categories-flowers.png",
     },
-    {
-      id: 8,
-      title: "Oil Crops",
-      subTitle: "",
-      image_Url:
-        "https://www.researchgate.net/publication/265978908/figure/fig1/AS:668975860047872@1536507682114/Pictures-of-oil-crops-A-Oil-palm-B-Soybean-C-Rape-D-Sunflower.jpg",
-    },
-    {
-      id: 9,
-      title: "Fibre crops",
-      subTitle: "",
-      image_Url:
-        "https://www.researchgate.net/publication/344628590/figure/fig3/AS:946443825188867@1602661200857/Natural-fibre-plants-a-cotton-b-sisal-c-jute-d-flax-e-hemp-f-bamboo.png",
-    },
+    // {
+    //   id: 8,
+    //   title: "Oil Crops",
+    //   subTitle: "",
+    //   image_Url:
+    //     "https://www.researchgate.net/publication/265978908/figure/fig1/AS:668975860047872@1536507682114/Pictures-of-oil-crops-A-Oil-palm-B-Soybean-C-Rape-D-Sunflower.jpg",
+    // },
+    // {
+    //   id: 9,
+    //   title: "Fibre crops",
+    //   subTitle: "",
+    //   image_Url:
+    //     "https://www.researchgate.net/publication/344628590/figure/fig3/AS:946443825188867@1602661200857/Natural-fibre-plants-a-cotton-b-sisal-c-jute-d-flax-e-hemp-f-bamboo.png",
+    // },
     {
       id: 10,
       title: "Dairy products",
       subTitle: "",
       image_Url:
-        "https://idahomilkproducts.b-cdn.net/wp-content/uploads/2021/09/processing-differences-common-dairy-products.jpg",
+        "https://i.ibb.co/pvSktWd/categories-dairy.png",
     },
-    {
-      id: 11,
-      title: "Sugar Products",
-      subTitle: "",
-      image_Url:
-        "https://www.dhampur.com/images/banner-4.jpg",
-    },
+    // {
+    //   id: 11,
+    //   title: "Sugar Products",
+    //   subTitle: "",
+    //   image_Url:
+    //     "https://www.dhampur.com/images/banner-4.jpg",
+    // },
   ];
+
+  // export const categoriesData = [
+  //   {
+  //     id: 1,
+  //     title: "Fruits",
+  //     subTitle: "",
+  //     image_Url:
+  //       "https://www.healthyeating.org/images/default-source/home-0.0/nutrition-topics-2.0/general-nutrition-wellness/2-2-2-3foodgroups_fruits_detailfeature.jpg?sfvrsn=64942d53_4",
+  //   },
+  //   {
+  //     id: 2,
+  //     title: "Vegetables",
+  //     subTitle: "",
+  //     image_Url:
+  //       "https://t2.gstatic.com/licensed-image?q=tbn:ANd9GcRuE3lniXx7IbyDd1pxL5kLA3lAI_hagCSfanks-AsZEw1uolMfCWB_J-CX-9WeAo0v",
+  //   },
+  //   {
+  //     id: 3,
+  //     title: "Nuts",
+  //     subTitle: "",
+  //     image_Url:
+  //       "https://t3.gstatic.com/licensed-image?q=tbn:ANd9GcSCvdFHhwzTDI2E_olCCd_m678XIDuBVqwaMZindtvhizpQDDjP3y4PUk2vJjvmwZ42",
+  //   },
+  //   {
+  //     id: 4,
+  //     title: "Seeds",
+  //     subTitle: "",
+  //     image_Url:
+  //       "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/%D0%A0%D0%B0%D0%B7%D0%BD%D0%BE%D0%BE%D0%B1%D1%80%D0%B0%D0%B7%D0%B8%D0%B5_%D1%81%D0%B5%D0%BC%D1%8F%D0%BD.jpg/1200px-%D0%A0%D0%B0%D0%B7%D0%BD%D0%BE%D0%BE%D0%B1%D1%80%D0%B0%D0%B7%D0%B8%D0%B5_%D1%81%D0%B5%D0%BC%D1%8F%D0%BD.jpg",
+  //   },
+  //   {
+  //     id: 5,
+  //     title: "Grains",
+  //     subTitle: "",
+  //     image_Url:
+  //       "https://static.toiimg.com/thumb/88831105.cms?width=400&height=300&resizemode=4&imgsize=323876",
+  //   },
+  //   {
+  //     id: 6,
+  //     title: "Spices",
+  //     subTitle: "",
+  //     image_Url:
+  //       "https://hospitalityinsights.ehl.edu/hubfs/1440/1440x960-spices.jpg",
+  //   },
+  //   {
+  //     id: 7,
+  //     title: "Flowers",
+  //     subTitle: "",
+  //     image_Url: "https://hips.hearstapps.com/hmg-prod/images/perennial-flowers-and-plants-1674072475.jpeg",
+  //   },
+  //   {
+  //     id: 8,
+  //     title: "Oil Crops",
+  //     subTitle: "",
+  //     image_Url:
+  //       "https://www.researchgate.net/publication/265978908/figure/fig1/AS:668975860047872@1536507682114/Pictures-of-oil-crops-A-Oil-palm-B-Soybean-C-Rape-D-Sunflower.jpg",
+  //   },
+  //   {
+  //     id: 9,
+  //     title: "Fibre crops",
+  //     subTitle: "",
+  //     image_Url:
+  //       "https://www.researchgate.net/publication/344628590/figure/fig3/AS:946443825188867@1602661200857/Natural-fibre-plants-a-cotton-b-sisal-c-jute-d-flax-e-hemp-f-bamboo.png",
+  //   },
+  //   {
+  //     id: 10,
+  //     title: "Dairy products",
+  //     subTitle: "",
+  //     image_Url:
+  //       "https://idahomilkproducts.b-cdn.net/wp-content/uploads/2021/09/processing-differences-common-dairy-products.jpg",
+  //   },
+  //   {
+  //     id: 11,
+  //     title: "Sugar Products",
+  //     subTitle: "",
+  //     image_Url:
+  //       "https://www.dhampur.com/images/banner-4.jpg",
+  //   },
+  // ];
   
   // product Data
   export const productData = [

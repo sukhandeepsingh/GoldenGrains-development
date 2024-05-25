@@ -5,6 +5,7 @@ import ProductCard from "../ProductCard/ProductCard";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { server } from "../../../server";
+import { Link } from "react-router-dom";
 // import { productData } from "../../../static/data";
 
 const FeaturedProduct = () => {
@@ -27,9 +28,16 @@ const FeaturedProduct = () => {
   return (
     <div>
       <div className={`${styles.section}`}>
-        <div className={`${styles.heading}`}>
+      <div className={`flex justify-between items-center`}>
+        <div className={`text-[27px] text-center md:text-start font-[600] font-Roboto`}>
           <h1>Featured Products</h1>
         </div>
+        <div
+            className={`${styles.button} !h-[32pt] !bg-[#279736] !text-[#fff] !w-auto !px-2 !rounded-[5pt]`}
+          >
+            <Link to="/products">See All Products</Link>
+          </div>
+      </div>
         {
           featuredProducts && featuredProducts.length !== 0 && (
             <>

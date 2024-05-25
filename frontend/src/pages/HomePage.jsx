@@ -17,11 +17,11 @@ const HomePage = () => {
         <Hero />
         <WhyChooseUs />
         <Categories />
-        <BestDeals />
+        {/* <BestDeals /> */}
         <Events />
         <FeaturedProduct />
         <TopFarmers />
-        <Sponsored />
+        {/* <Sponsored /> */}
         <Footer />
     </div>
   )

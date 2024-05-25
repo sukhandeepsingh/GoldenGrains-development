@@ -27,7 +27,7 @@ const TopFarmers = () => {
             topFarmers.map((farmer) => (
               <div
                 key={farmer._id}
-                className="rounded-lg overflow-hidden min-w-[200px]"
+                className="rounded-lg overflow-hidden min-w-[200px] hover:scale-[1.03] hover:shadow-xl transition-transform duration-200 hover:border-gray-600 hover:border-[1pt] p-2"
               >
                 <Link to={`/shop/preview/${farmer._id}`}>
                   <img
@@ -45,7 +45,7 @@ const TopFarmers = () => {
                         ({farmer?.rating?.toFixed(1)})
                       </span>
                     </div>
-                    <p className="mb-4 text-[#fff]">{farmer?.description}</p>
+                    <p className="mb-4 text-[#fff] text-justify">{farmer?.description?.length > 100 ? (<> {farmer?.description?.slice(0,101)} ... <span className="text-[11pt] text-gray-400">see more on shop page</span> </>) : farmer?.description}</p>
                     <div className="flex items-center justify-between text-sm text-[#fff]">
                       <span>Member Since: {farmer?.createdAt?.slice(0, 10)}</span>
                     </div>

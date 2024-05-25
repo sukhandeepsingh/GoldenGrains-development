@@ -4,6 +4,8 @@ import Footer from "../components/Layout/Footer";
 import { categoriesData } from "../static/data";
 import { useNavigate } from "react-router-dom";
 import styles from "../styles/styles";
+import { FaForward } from "react-icons/fa";
+import { IoPlayForwardOutline } from "react-icons/io5";
 
 const CategoriesPage = () => {
   const navigate = useNavigate();
@@ -39,7 +41,7 @@ const CategoriesPage = () => {
                     <div>
                       <img
                         src={i.image_Url}
-                        className="w-[120px] object-cover aspect-square"
+                        className="w-[120px] object-contain aspect-square"
                         alt=""
                       />
                     </div>
@@ -50,6 +52,11 @@ const CategoriesPage = () => {
                 </div>
               );
             })}
+            <div className="w-full h-[180px] border-slate-600 bg-gray-200 border-[1pt] rounded-[8pt] flex items-center justify-center cursor-pointer overflow-hidden">
+              <div className="w-full flex justify-center text-center items-center">
+                <h5 className={`text-[18px]`}><span className="flex justify-center"><IoPlayForwardOutline size={50} /></span>More categories coming soon...</h5>
+              </div>
+            </div>
         </div>
       </div>
       <br />

@@ -43,7 +43,7 @@ const ProductsPage = () => {
       try {
         let url = `${server}/product/get-all-products-main?page=${currentPage}&limit=${productsPerPage}`;
         if (selectedCategories) {
-          url += `&category=${selectedCategories.join(",") || categoryData}`;
+          url += `&category=${selectedCategories.join(",") || categoryData || ""}`;
         }
         if (selectedSort) {
           url += `&sort=${selectedSort}`;

@@ -27,7 +27,7 @@ const SuggestedProduct = ({ data }) => {
             {
                 productData && productData.map((i,index) => (
                     <ProductCard data={i} key={index} />
-                ))
+                )).slice(0,5)
             }
           </div>
         </div>

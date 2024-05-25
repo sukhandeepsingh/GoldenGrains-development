@@ -27,7 +27,7 @@ const Navbar = ({ active }) => {
         </div> */}
 
       <div className="800px:flex relative items-center">
-        <div className="flex cursor-pointer items-center 800px:hover:scale-105 transition-all duration-200">
+        <div className="flex cursor-pointer items-center 800px:hover:scale-105 transition-all duration-150">
           <Link
             to="/"
             className={`${
@@ -52,9 +52,9 @@ const Navbar = ({ active }) => {
           </Link>
         </div>
         <div
-          className="hidden 800px:flex relative cursor-pointer"
-          onMouseEnter={() => setDropDown(true)}
-          onMouseLeave={() => setDropDown(false)}
+          className="hidden 800px:flex relative cursor-pointer 800px:hover:scale-105 transition-all duration-150"
+          // onMouseEnter={() => setDropDown(true)}
+          // onMouseLeave={() => setDropDown(false)}
         >
           <Link
             to="/categories"
@@ -75,7 +75,7 @@ const Navbar = ({ active }) => {
           ) : null}
           </div>
         </div>
-        <div className="flex cursor-pointer 800px:hover:scale-105 transition-all duration-200">
+        <div className="flex cursor-pointer 800px:hover:scale-105 transition-all duration-150">
           <Link
             to="/products"
             className={`${
@@ -87,7 +87,7 @@ const Navbar = ({ active }) => {
             Products
           </Link>
         </div>
-        <div className="flex cursor-pointer 800px:hover:scale-105 transition-all duration-200">
+        <div className="flex cursor-pointer 800px:hover:scale-105 transition-all duration-150">
           <Link
             to="/events"
             className={`${
@@ -99,7 +99,7 @@ const Navbar = ({ active }) => {
             Events
           </Link>
         </div>
-        <div className="flex cursor-pointer 800px:hover:scale-105 transition-all duration-200">
+        <div className="flex cursor-pointer 800px:hover:scale-105 transition-all duration-150">
           <Link
             to="/faq"
             className={`${
@@ -111,7 +111,7 @@ const Navbar = ({ active }) => {
             FAQ
           </Link>
         </div>
-        <div className="hidden 800px:flex cursor-pointer 800px:border-slate-900 800px:rounded-full 800px:border-[1px] 800px:hover:scale-105 transition-all duration-200">
+        <div className="hidden 800px:flex cursor-pointer 800px:border-slate-900 800px:rounded-full 800px:border-[1px] 800px:hover:scale-105 transition-all duration-150">
           {isSeller ? (
             <Link to="/dashboard" className="text-[#000] flex px-4 items-center pb-[30px] 800px:pb-0 font-[500]">
                 Farmer Dashboard 

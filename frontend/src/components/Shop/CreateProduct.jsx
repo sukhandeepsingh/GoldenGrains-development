@@ -27,7 +27,7 @@ const CreateProduct = () => {
     }
     if (success) {
       toast.success("Product listed successfully on platform!!!");
-      navigate("/dashboard");
+      navigate("/dashboard-products");
       window.location.reload();
     }
   }, [dispatch, error, success]);
@@ -51,7 +51,7 @@ const CreateProduct = () => {
     newForm.append("description", description);
     newForm.append("category", category);
     newForm.append("tags", tags);
-    newForm.append("originalPrice", originalPrice);
+    newForm.append("originalPrice", originalPrice ? Number(originalPrice) : "");
     newForm.append("discountPrice", discountPrice);
     newForm.append("stock", stock);
     newForm.append("shopId", seller._id);
@@ -59,7 +59,7 @@ const CreateProduct = () => {
   };
 
   return (
-    <div className="w-[90%] 800px:w-[60%] bg-white  shadow h-[80vh] rounded-[4px] p-3 overflow-y-scroll mt-3">
+    <div className="w-[90%] 800px:w-[60%] bg-white  shadow h-full rounded-[4px] p-3 mt-3 mb-4">
       <h5 className="text-[30px] font-Poppins text-center">Add a new product listing</h5>
       {/* create product form */}
       <form onSubmit={handleSubmit}>

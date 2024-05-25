@@ -360,7 +360,9 @@ router.get(
   catchAsyncErrors(async (req, res, next) => {
     try {
       // Fetch all sellers sorted by their ratings in descending order
-      const topFarmers = await Shop.find({ ratingCount: { $gte: 100 } })
+      const topFarmers = await Shop.find(
+        // { ratingCount: { $gte: 100 } }
+      )
         .select('_id name description avatar rating ratingCount createdAt')
         .sort({ rating: -1, createdAt: 1, ratingCount: -1 })
         .limit(4);

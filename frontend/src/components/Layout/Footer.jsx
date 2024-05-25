@@ -42,7 +42,7 @@ const Footer = () => {
             style={{ filter: "brightness(0) invert(1)" }}
           />
           <br />
-          <p>Lorem ipsum dolor sit amet consectetur, adipisicing.</p>
+          <p>Where quality meets standards</p>
           <div className="flex items-center mt-[15px]">
             <AiFillFacebook size={25} className="cursor-pointer" />
             <AiOutlineTwitter
@@ -103,7 +103,7 @@ const Footer = () => {
         </ul>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 text-center pt-2 text-gray-400 text-sm pb-8">
-        <span>© 2020 GoldenGrains. All rights reserved.</span>
+        <span>© 2024 GoldenGrains. All rights reserved.</span>
         <span>Terms of service · Privacy Policy</span>
         <div className="sm:block flex items-center justify-center w-full">
           <img
