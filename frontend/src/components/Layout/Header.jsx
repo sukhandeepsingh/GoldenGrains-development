@@ -64,7 +64,8 @@ const Header = ({ activeHeading }) => {
           <div className="h-[15%] w-[8%] -mt-8">
             <Link to="/">
               <img
-                src="https://i.ibb.co/Pg24SHR/weblogo.png"
+                // src="https://i.ibb.co/Pg24SHR/weblogo.png"
+                src="https://i.ibb.co/fzB2JRpC/weblogo.png"
                 alt="Golden Grains"
               />
             </Link>
@@ -162,7 +163,8 @@ const Header = ({ activeHeading }) => {
               <div className="w-[100px]">
                 <Link to="/">
                   <img
-                    src="https://i.ibb.co/Pg24SHR/weblogo.png"
+                    // src="https://i.ibb.co/Pg24SHR/weblogo.png"
+                    src="hhttps://i.ibb.co/fzB2JRpC/weblogo.png"
                     alt="Golden Grains"
                     className="w-[100px] h-auto"
                   />
@@ -260,7 +262,8 @@ const Header = ({ activeHeading }) => {
           <div className="w-[100px] h-auto flex items-center">
             <Link to="/">
               <img
-                src="https://i.ibb.co/Pg24SHR/weblogo.png"
+                // src="https://i.ibb.co/Pg24SHR/weblogo.png"
+                src="https://i.ibb.co/fzB2JRpC/weblogo.png"
                 alt="Golden Grains"
                 className="cursor-pointer"
               />

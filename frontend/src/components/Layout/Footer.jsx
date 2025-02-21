@@ -36,7 +36,8 @@ const Footer = () => {
       <div className="grid grid-cols-1 sm:gird-cols-2 lg:grid-cols-4 gap-6 sm:px-8 px-5 py-16 sm:text-center">
         <ul className="text-center sm:text-start flex sm:block flex-col items-center">
           <img
-            src="https://i.ibb.co/Pg24SHR/weblogo.png"
+            // src="https://i.ibb.co/Pg24SHR/weblogo.png"
+            src="https://i.ibb.co/fzB2JRpC/weblogo.png"
             alt=""
             className="w-[180pt] h-auto"
             style={{ filter: "brightness(0) invert(1)" }}

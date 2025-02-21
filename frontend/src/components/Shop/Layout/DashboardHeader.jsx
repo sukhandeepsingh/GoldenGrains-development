@@ -14,7 +14,8 @@ const DashboardHeader = () => {
       <div>
         <Link to="/">
           <img
-            src="https://i.ibb.co/Pg24SHR/weblogo.png"
+            // src="https://i.ibb.co/Pg24SHR/weblogo.png"
+            src="https://i.ibb.co/fzB2JRpC/weblogo.png"
             alt=""
             className="w-[100px] h-auto"
           />
